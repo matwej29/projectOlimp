@@ -1,5 +1,5 @@
 const express = require("express");
-const hbs = require("express-handlebars");
+const hbs = require("handlebars");
 const app = express();
 const Storage = require("./News Storage.js");
 
@@ -23,18 +23,17 @@ const storage = new Storage();
 
 app.listen(3000);
 
-app.get("/", function (req, res) {
-  res.send("hello");
-});
-
 app.get("/home", (req, res) => {
   temps = storage.getList();
   res.render("home", { list: temps });
 });
 
-app.get("/add", (req, res) => {
+app.post("/add", (req, res) => {
   storage.add(req.body.data);
-  res.redirect("/home");
+});
+
+app.get("/add", (req, res) => {
+  res.render("addition");
 });
 
 app.get("/delete", (req, res) => {
