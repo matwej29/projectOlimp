@@ -20,8 +20,8 @@ class Storage {
 
   delete(id) {
     if (this.hasId(id)) {
-      const i = this.items.findIndex(id);
-      this.items.slice(i, 1);
+      const i = this.findIndexById(id);
+      this.items.splice(i, 1);
       return true;
     }
     return false;
@@ -31,7 +31,7 @@ class Storage {
     return this.items.findIndex((item) => item.id === id) >= 0;
   }
 
-  findIndex(id) {
+  findIndexById(id) {
     return this.items.findIndex((item) => item.id === id);
   }
 }
