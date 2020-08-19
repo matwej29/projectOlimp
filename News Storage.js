@@ -6,10 +6,11 @@ class Storage {
 
   getList() {
     let temps = [];
-    for (let i = 0; i <= this.items.length; i += 1) {
+    for (let i = 0; i < this.items.length; i += 1) {
       const { value, id } = this.items[i];
       temps[i] = { value: value, id: id };
     }
+    return temps;
   }
 
   add(s) {

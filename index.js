@@ -1,21 +1,13 @@
 const express = require("express");
-const hbs = require("handlebars");
 const app = express();
 const Storage = require("./News Storage.js");
+const hbs = require("hbs");
 
 app.set("view engine", "hbs");
-
 app.use(express.urlencoded({ extended: true }));
+app.set("views", __dirname + "/views");
 
-app.engine(
-  "hbs",
-  hbs({
-    extname: "hbs",
-    defaultView: "",
-    layoutsDir: __dirname + "/views/layouts",
-    partialsDir: __dirname + "/views/partials/",
-  })
-);
+hbs.registerPartials(__dirname + "/views/partials");
 
 app.use("/static", express.static(__dirname + "/static"));
 
@@ -30,6 +22,7 @@ app.get("/home", (req, res) => {
 
 app.post("/add", (req, res) => {
   storage.add(req.body.data);
+  res.redirect("/home");
 });
 
 app.get("/add", (req, res) => {
@@ -38,7 +31,7 @@ app.get("/add", (req, res) => {
 
 app.get("/delete", (req, res) => {
   const tmpid = parseInt(req.query.id, 10);
-  if (storage.delete) {
+  if (storage.delete(tmpid)) {
     res.redirect("/home");
   } else {
     res.status(404).send("Not found");
