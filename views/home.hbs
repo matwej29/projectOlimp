@@ -1,8 +1,16 @@
 <div class="content_main-block centering">
+    {{#each list}}
+
+    <div class="row">
+        <p class="row__text">{{ this.text }}</p>
+    </div>
+    {{/each}}
+
     <a href="/add" class="add__action"></a>
-    {{#each this.list}}
+    {{#each list}}
     <div class="each-list-container centering">
         <div class="list-container__value">{{this.value}}</div>
         <a href="/delete?id={{id}}" class="list-container__delete-action"></a>
     </div>
-    {{/each}}</div>
+    {{/each}}
+</div>
