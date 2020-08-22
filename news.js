@@ -1,5 +1,5 @@
-const pg = require("pg");
-const config = require("./config.json");
+const pg = require('pg');
+const config = require('./config.json');
 class News {
   constructor() {
     this.pool = new pg.Pool({
@@ -15,7 +15,7 @@ class News {
     const client = await this.pool.connect();
     let result;
     try {
-      result = await client.query("SELECT * from news");
+      result = await client.query('SELECT * from news');
     } catch (err) {
       console.log(err);
       return false;
@@ -25,7 +25,7 @@ class News {
   }
 
   async itemById(id) {
-    let text = "SELECT * from news WHERE id = $1";
+    let text = 'SELECT * from news WHERE id = $1';
     let result;
     const client = await this.pool.connect();
     try {
@@ -41,10 +41,10 @@ class News {
   }
 
   async add(header, text) {
-    let text = "INSERT INTO news (header, text) VALUES ($1, $2)";
+    let tmptext = 'INSERT INTO news (header, text) VALUES ($1, $2)';
     const client = await this.pool.connect();
     try {
-      await client.query(text, [header, text]);
+      await client.query(tmptext, [header, text]);
     } catch (err) {
       console.log(err);
     }

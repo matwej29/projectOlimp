@@ -5,8 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
+    "git": "^0.1.5",
     "handlebars": "^4.7.6",
-    "hbs": "^4.1.1"
+    "hbs": "^4.1.1",
+    "pg": "^8.3.2"
   },
   "devDependencies": {},
   "scripts": {

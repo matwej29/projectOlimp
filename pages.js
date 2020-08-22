@@ -1,5 +1,7 @@
 class Controller {
-  info(req, res) {}
+    info(req,res) {
+    res.send('afwlja');
+  }
 }
 
 module.exports = Controller;
