@@ -1,0 +1,11 @@
+<form action="{{#if action_is_edit}}/{{action}}?id={{tmpid}}{{else}}/{{action}}{{/if}}" method="post">
+    <div class="content_main-block centering">
+        {{#if action_is_edit}}
+        <h3>{{header}}</h3>
+        {{else}}
+        <input type="text" placeholder={{header}} name=header class="input-container__input" />
+        {{/if}}
+        <input type="text" placeholder='Текст' name=text class="input-container__input" />
+        <button type="submit"></button>
+    </div>
+</form>
