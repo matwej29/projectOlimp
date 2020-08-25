@@ -16,19 +16,19 @@ const Storage = require('./news.js');
 const storage = new Storage();
 
 app.get('/', function (req, res) {
-  res.send('hello');
+  Pages.redirectToHome(res);
 });
 
 app.get('/info', Pages.info);
 
 app.get('/home', async (req, res) => {
   let temps = await storage.news();
-  Pages.home(temps,req,res);
+  Pages.home(temps, req, res);
 });
 
 app.post('/add', (req, res) => {
   storage.add(req.body.header, req.body.text);
-  res.redirect('/home');
+  Pages.redirectToHome(res);
 });
 
 app.get('/add', Pages.add);
@@ -36,25 +36,33 @@ app.get('/add', Pages.add);
 app.get('/delete', (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   if (!storage.delete(tmpid)) {
-    res.status(404).send('Not found');
+    Pages.status404(res);
   }
-  res.redirect('/home');
+  Pages.redirectToHome(res);
 });
 
 app.get('/edit', async (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const item = await storage.itemById(tmpid);
   const header = await item.header;
-  res.render('edit', { tmpid, header });
+  Pages.edit(req, res, tmpid, header);
 });
 
 app.post('/edition', (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const value = req.body.text;
   if (!storage.edit(tmpid, value)) {
-    res.status(404).send('Not found');
+    Pages.status404(res);
   }
-  res.redirect('/home');
+  Pages.redirectToHome(res);
+});
+
+app.get('/organizers', (req, res) => {
+  Pages.organizers(req, res);
+});
+
+app.get('/partners', (req,res)=>{
+  Pages.partners(req,res);
 });
 
 app.listen(3000);

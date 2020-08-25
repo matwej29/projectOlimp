@@ -64,8 +64,6 @@ a.list-container__delete-action {
 
 .menu__action {
   align-items: center;
-  text-decoration: none;
-  color: honeydew;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -100,11 +98,19 @@ a.list-container__delete-action {
 .action__icon-add {
   background-image: url(/static/svg/plus.svg);
 }
-.action__icon-edit{
+.action__icon-edit {
   background-image: url(/static/svg/edit_pencil.svg);
 }
 
-.column-reverse{
+.column-reverse {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.none_decoration {
+  text-decoration: none;
+}
+
+.color_honey {
+  color: honeydew;
 }
