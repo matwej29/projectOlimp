@@ -9,25 +9,23 @@ app.set("views", __dirname + "/views");
 hbs.registerPartials(__dirname + "/views/partials");
 
 app.use("/static", express.static(__dirname + "/static"));
-app.use(
-  basicAuth({
-    users: { admin: "admin" },
-  })
-);
+const auth = basicAuth({
+  users: { admin: "admin" },
+  challenge: true,
+});
 
 const pagesController = require("./pages.js");
 const Pages = new pagesController();
-
 const Storage = require("./news.js");
 const storage = new Storage();
 
 app.get("/", function (req, res) {
-  res.send("hello");
+  res.redirect("/home");
 });
 
 app.get("/info", Pages.info);
 
-app.get("/home", async (req, res) => {
+app.get("/home", auth, async (req, res) => {
   let temps = await storage.news();
   Pages.home(temps, req, res);
 });
