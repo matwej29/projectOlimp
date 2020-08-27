@@ -23,7 +23,7 @@ const auth = basicAuth({
 });
 
 app.get("/", function (req, res) {
-  Pages.redirectToHome(res);
+  res.redirect("/home");
 });
 
 app.get("/info", Pages.info);
@@ -33,9 +33,9 @@ app.get("/home", async (req, res) => {
   Pages.home(temps, req, res);
 });
 
-app.post("/add", auth, (req, res) => {
+app.post("/add", (req, res) => {
   storage.add(req.body.header, req.body.text);
-  Pages.redirectToHome(res);
+  res.redirect("/home");
 });
 
 app.get("/add", Pages.add);
