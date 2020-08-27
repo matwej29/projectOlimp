@@ -33,12 +33,12 @@ app.get("/home", async (req, res) => {
   Pages.home(temps, req, res);
 });
 
+app.get("/add", auth, Pages.add);
+
 app.post("/add", (req, res) => {
   storage.add(req.body.header, req.body.text);
   res.redirect("/home");
 });
-
-app.get("/add", Pages.add);
 
 app.get("/delete", (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
