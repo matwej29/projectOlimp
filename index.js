@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
-const basicAuth = require("express-basic-auth");
 
 app.set("view engine", "hbs");
 app.use(express.urlencoded({ extended: true }));
@@ -9,10 +8,6 @@ app.set("views", __dirname + "/views");
 hbs.registerPartials(__dirname + "/views/partials");
 
 app.use("/static", express.static(__dirname + "/static"));
-const auth = basicAuth({
-  users: { admin: "admin" },
-  challenge: true,
-});
 
 const pagesController = require("./pages.js");
 const Pages = new pagesController();
@@ -25,7 +20,7 @@ app.get("/", function (req, res) {
 
 app.get("/info", Pages.info);
 
-app.get("/home", auth, async (req, res) => {
+app.get("/home", async (req, res) => {
   let temps = await storage.news();
   Pages.home(temps, req, res);
 });
@@ -62,3 +57,10 @@ app.post("/edition", (req, res) => {
 });
 
 app.listen(3000);
+
+const basicAuth = require("express-basic-auth");
+
+const auth = basicAuth({
+  users: { admin: "admin" },
+  challenge: true,
+});
