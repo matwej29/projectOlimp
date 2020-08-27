@@ -36,25 +36,33 @@ app.get("/add", Pages.add);
 app.get("/delete", (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   if (!storage.delete(tmpid)) {
-    res.status(404).send("Not found");
+    Pages.status404(res);
   }
-  res.redirect("/home");
+  Pages.redirectToHome(res);
 });
 
 app.get("/edit", async (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const item = await storage.itemById(tmpid);
   const header = await item.header;
-  res.render("edit", { tmpid, header });
+  Pages.edit(req, res, tmpid, header);
 });
 
 app.post("/edition", (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const value = req.body.text;
   if (!storage.edit(tmpid, value)) {
-    res.status(404).send("Not found");
+    Pages.status404(res);
   }
-  res.redirect("/home");
+  Pages.redirectToHome(res);
+});
+
+app.get("/organizers", (req, res) => {
+  Pages.organizers(req, res);
+});
+
+app.get("/partners", (req, res) => {
+  Pages.partners(req, res);
 });
 
 app.listen(3000);

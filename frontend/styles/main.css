@@ -64,8 +64,6 @@ a.list-container__delete-action {
 
 .menu__action {
   align-items: center;
-  text-decoration: none;
-  color: honeydew;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
@@ -107,4 +105,12 @@ a.list-container__delete-action {
 .column-reverse {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.none_decoration {
+  text-decoration: none;
+}
+
+.color_honey {
+  color: honeydew;
 }
