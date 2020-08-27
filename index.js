@@ -11,6 +11,7 @@ app.use("/static", express.static(__dirname + "/static"));
 
 const pagesController = require("./pages.js");
 const Pages = new pagesController();
+
 const Storage = require("./news.js");
 const storage = new Storage();
 
