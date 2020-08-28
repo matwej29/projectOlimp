@@ -18,10 +18,12 @@ const adminPages = new adminController();
 const Storage = require("./news.js");
 const storage = new Storage();
 
+const marked = require("marked");
+
 const basicAuth = require("express-basic-auth");
 
 const auth = basicAuth({
-  users: { admin: "admin32" },
+  users: { admin: "admin" },
   challenge: true,
   realm: "Imb4T3st4pp",
 });
@@ -32,6 +34,9 @@ app.get("/", function (req, res) {
 
 app.get("/admin", auth, async (req, res) => {
   let temps = await storage.news();
+  temps.forEach(async (element) => {
+    element.text = marked(element.text);
+  });
   adminPages.home(temps, req, res);
 });
 
@@ -39,16 +44,16 @@ app.get("/info", Pages.info);
 
 app.get("/home", async (req, res) => {
   let temps = await storage.news();
+  temps.forEach(async (element) => {
+    element.text = marked(element.text);
+  });
   Pages.home(temps, req, res);
 });
 
 app.get("/add", adminPages.add);
 
 app.post("/add", async (req, res) => {
-  if (
-    (await (req.auth != undefined)) &
-    !storage.add(req.body.header, req.body.text)
-  ) {
+  if (req.auth != undefined && !storage.add(req.body.header, req.body.text)) {
     res.redirect("/admin");
   } else {
     res.send("404");
@@ -57,7 +62,7 @@ app.post("/add", async (req, res) => {
 
 app.get("/delete", (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
-  if (!storage.delete(tmpid)) {
+  if (req.auth != undefined && !storage.delete(tmpid)) {
     Pages.status404(res);
   }
   res.redirect("/admin");
