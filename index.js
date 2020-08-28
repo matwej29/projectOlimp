@@ -33,6 +33,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/admin", auth, async (req, res) => {
+  console.log(req.auth);
   let temps = await storage.news();
   temps.forEach(async (element) => {
     element.text = marked(element.text);
