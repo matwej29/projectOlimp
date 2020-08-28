@@ -21,7 +21,7 @@ const storage = new Storage();
 const basicAuth = require("express-basic-auth");
 
 const auth = basicAuth({
-  users: { admin: "admin" },
+  users: { admin: "admin32" },
   challenge: true,
   realm: "Imb4T3st4pp",
 });
@@ -44,8 +44,11 @@ app.get("/home", async (req, res) => {
 
 app.get("/add", adminPages.add);
 
-app.post("/add", (req, res) => {
-  if (req.auth && !storage.add(req.body.header, req.body.text)) {
+app.post("/add", async (req, res) => {
+  if (
+    (await (req.auth != undefined)) &
+    !storage.add(req.body.header, req.body.text)
+  ) {
     res.redirect("/admin");
   } else {
     res.send("404");
