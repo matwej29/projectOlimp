@@ -46,7 +46,7 @@ app.get("/add", adminPages.add);
 
 app.post("/add", async (req, res) => {
   if (
-    (await (req.auth != undefined)) &
+    (await (req.auth != undefined)) &&
     !storage.add(req.body.header, req.body.text)
   ) {
     res.redirect("/admin");
@@ -78,7 +78,7 @@ app.get("/edit", async (req, res) => {
 app.post("/edition", (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const value = req.body.text;
-  if (!storage.edit(tmpid, value) & req.auth) {
+  if (!storage.edit(tmpid, value) && req.auth) {
     Pages.status404(res);
   }
   res.redirect("/admin");
