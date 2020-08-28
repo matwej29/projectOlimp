@@ -12,6 +12,9 @@ app.use("/static", express.static(__dirname + "/static"));
 const pagesController = require("./pages.js");
 const Pages = new pagesController();
 
+const adminController = require("./adminPages.js");
+const adminPages = new adminController();
+
 const Storage = require("./news.js");
 const storage = new Storage();
 
@@ -20,10 +23,16 @@ const basicAuth = require("express-basic-auth");
 const auth = basicAuth({
   users: { admin: "admin" },
   challenge: true,
+  realm: "Imb4T3st4pp",
 });
 
 app.get("/", function (req, res) {
   res.redirect("/home");
+});
+
+app.get("/admin", auth, async (req, res) => {
+  let temps = await storage.news();
+  adminPages.home(temps, req, res);
 });
 
 app.get("/info", Pages.info);
@@ -33,11 +42,14 @@ app.get("/home", async (req, res) => {
   Pages.home(temps, req, res);
 });
 
-app.get("/add", auth, Pages.add);
+app.get("/add", adminPages.add);
 
 app.post("/add", (req, res) => {
-  storage.add(req.body.header, req.body.text);
-  res.redirect("/home");
+  if (req.auth && !storage.add(req.body.header, req.body.text)) {
+    res.redirect("/admin");
+  } else {
+    res.send("404");
+  }
 });
 
 app.get("/delete", (req, res) => {
@@ -45,31 +57,32 @@ app.get("/delete", (req, res) => {
   if (!storage.delete(tmpid)) {
     Pages.status404(res);
   }
-  Pages.redirectToHome(res);
+  res.redirect("/admin");
 });
 
 app.get("/edit", async (req, res) => {
-  const tmpid = parseInt(req.query.id.toString(), 10);
-  const item = await storage.itemById(tmpid);
-  const header = await item.header;
-  Pages.edit(req, res, tmpid, header);
+  try {
+    const tmpid = parseInt(req.query.id.toString(), 10);
+    const item = await storage.itemById(tmpid);
+    const header = await item.header;
+    adminPages.edit(req, res, tmpid, header);
+    res.redirect("/admin");
+  } catch {
+    res.send("404");
+  }
 });
 
 app.post("/edition", (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const value = req.body.text;
-  if (!storage.edit(tmpid, value)) {
+  if (!storage.edit(tmpid, value) & req.auth) {
     Pages.status404(res);
   }
-  Pages.redirectToHome(res);
+  res.redirect("/admin");
 });
 
-app.get("/organizers", (req, res) => {
-  Pages.organizers(req, res);
-});
+app.get("/organizers", Pages.organizers);
 
-app.get("/partners", (req, res) => {
-  Pages.partners(req, res);
-});
+app.get("/partners", Pages.partners);
 
 app.listen(3000);

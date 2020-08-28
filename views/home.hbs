@@ -1,14 +1,9 @@
 <div class="content_main-block centering">
-    <a href="/add" class="add__action background-image_when-svg action__icon-add"></a>
     <div class="column-reverse">
         {{#each this.list}}
         <div class="each-list-container centering column">
             <div class="list-container__header">{{this.header}}</div>
             <div class="list-container__text">{{ this.text }}</div>
-            <a href="/delete?id={{id}}"
-                class="list-container__delete-action action__icon-delete background-image_when-svg"></a>
-            <a href="/edit?id={{id}}"
-                class="list-container__delete-action action__icon-edit background-image_when-svg"></a>
         </div>
         {{/each}}
     </div>
