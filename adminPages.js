@@ -7,7 +7,7 @@ class Controller {
   }
 
   edit(req, res, tmpid, header) {
-    res.render("edit", { tmpid, header });
+    res.render("edit", { tmpid:tmpid, header:header});
   }
 }
 
