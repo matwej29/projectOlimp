@@ -33,6 +33,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/admin", auth, async (req, res) => {
+  console.log(req.auth);
   let temps = await storage.news();
   temps.forEach(async (element) => {
     element.text = marked(element.text);
@@ -90,7 +91,7 @@ app.post("/edition", auth, (req, res) => {
   }
   const tmpid = parseInt(req.query.id.toString(), 10);
   const value = req.body.text;
-  if (!storage.edit(tmpid, value) & req.auth) {
+  if (!storage.edit(tmpid, value) && req.auth) {
     Pages.status404(res);
   }
   res.redirect("/admin");
