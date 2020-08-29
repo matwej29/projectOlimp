@@ -62,11 +62,11 @@ app.post("/add", auth, async (req, res) => {
 });
 
 app.get("/delete", auth, (req, res) => {
-  const tmpid = parseInt(req.query.id.toString(), 10);
-  if (req.auth === undefined && !storage.delete(tmpid)) {
-    Pages.status404(res);
+  if (req.auth !== undefined && storage.delete(req.query.id)) {
+    res.redirect("/admin");
+  } else {
+    res.send("404");
   }
-  res.redirect("/admin");
 });
 
 app.get("/edit", auth, async (req, res) => {
