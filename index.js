@@ -72,6 +72,7 @@ app.get("/delete", auth, (req, res) => {
 app.get("/edit", auth, async (req, res) => {
   if (req.auth === undefined) {
     res.send("404");
+    return;
   }
   try {
     const tmpid = parseInt(req.query.id.toString(), 10);
