@@ -33,7 +33,6 @@ app.get("/", function (req, res) {
 });
 
 app.get("/admin", auth, async (req, res) => {
-  console.log(req.auth);
   let temps = await storage.news();
   temps.forEach(async (element) => {
     element.text = marked(element.text);
@@ -54,7 +53,8 @@ app.get("/home", async (req, res) => {
 app.get("/add", auth, adminPages.add);
 
 app.post("/add", auth, async (req, res) => {
-  if (req.auth === undefined && !storage.add(req.body.header, req.body.text)) {
+  if (req.auth !== undefined) {
+    storage.add(req.body.header, req.body.text);
     res.redirect("/admin");
   } else {
     res.send("404");

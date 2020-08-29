@@ -47,10 +47,8 @@ class News {
       await client.query(tmptext, [header, text]);
     } catch (err) {
       console.log(err);
-      return false;
     }
     client.release();
-    return true;
   }
 
   async edit(id, value) {

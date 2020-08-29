@@ -30,7 +30,7 @@ body {
 }
 
 .content_main-block {
-  width: 400px;
+  width: auto;
   box-sizing: border-box;
   background-color: aliceblue;
   flex-direction: column;
