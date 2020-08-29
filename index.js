@@ -6,7 +6,7 @@ app.set("view engine", "hbs");
 app.use(express.urlencoded({ extended: true }));
 app.set("views", __dirname + "/views");
 hbs.registerPartials(__dirname + "/views/partials");
-app.use("/frontend", express.static(__dirname + "/frontend"));
+
 app.use("/static", express.static(__dirname + "/static"));
 
 const pagesController = require("./pages.js");

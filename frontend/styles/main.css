@@ -9,12 +9,12 @@ body {
   font-style: normal;
 }
 
-a.add__action {
+.add__action {
   width: 50px;
   height: 20px;
   background-color: black;
 }
-a.list-container__delete-action {
+.list-container__action {
   position: relative;
   margin-bottom: 3px;
   margin-right: 3px;
@@ -26,7 +26,6 @@ a.list-container__delete-action {
 .each-list-container {
   width: 150px;
   background-color: darkgrey;
-  flex-direction: c;
   margin-top: 10px;
 }
 
@@ -39,7 +38,7 @@ a.list-container__delete-action {
   border-radius: 5px;
 }
 
-.list-container__value {
+.list-container__text {
   width: 120px;
   box-sizing: border-box;
   margin-left: 10px;
