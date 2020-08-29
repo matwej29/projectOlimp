@@ -53,11 +53,7 @@ app.get("/home", async (req, res) => {
 app.get("/add", auth, adminPages.add);
 
 app.post("/add", auth, async (req, res) => {
-  if (req.auth === undefined) {
-    res.send("404");
-    console.log(req.auth);
-  }
-  if (!storage.add(req.body.header, req.body.text)) {
+  if (req.auth === undefined && !storage.add(req.body.header, req.body.text)) {
     res.redirect("/admin");
   } else {
     res.send("404");
@@ -65,12 +61,8 @@ app.post("/add", auth, async (req, res) => {
 });
 
 app.get("/delete", auth, (req, res) => {
-  if (req.auth === undefined) {
-    res.send("404");
-    console.log(req.auth);
-  }
   const tmpid = parseInt(req.query.id.toString(), 10);
-  if (!storage.delete(tmpid)) {
+  if (req.auth === undefined && !storage.delete(tmpid)) {
     Pages.status404(res);
   }
   res.redirect("/admin");
@@ -79,7 +71,6 @@ app.get("/delete", auth, (req, res) => {
 app.get("/edit", auth, async (req, res) => {
   if (req.auth === undefined) {
     res.send("404");
-    console.log(req.auth);
   }
   try {
     const tmpid = parseInt(req.query.id.toString(), 10);
