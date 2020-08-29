@@ -50,25 +50,37 @@ app.get("/home", async (req, res) => {
   Pages.home(temps, req, res);
 });
 
-app.get("/add", adminPages.add);
+app.get("/add", auth, adminPages.add);
 
-app.post("/add", async (req, res) => {
-  if (req.auth != undefined && !storage.add(req.body.header, req.body.text)) {
+app.post("/add", auth, async (req, res) => {
+  if (req.auth === undefined) {
+    res.send("404");
+    console.log(req.auth);
+  }
+  if (!storage.add(req.body.header, req.body.text)) {
     res.redirect("/admin");
   } else {
     res.send("404");
   }
 });
 
-app.get("/delete", (req, res) => {
+app.get("/delete", auth, (req, res) => {
+  if (req.auth === undefined) {
+    res.send("404");
+    console.log(req.auth);
+  }
   const tmpid = parseInt(req.query.id.toString(), 10);
-  if (req.auth != undefined && !storage.delete(tmpid)) {
+  if (!storage.delete(tmpid)) {
     Pages.status404(res);
   }
   res.redirect("/admin");
 });
 
-app.get("/edit", async (req, res) => {
+app.get("/edit", auth, async (req, res) => {
+  if (req.auth === undefined) {
+    res.send("404");
+    console.log(req.auth);
+  }
   try {
     const tmpid = parseInt(req.query.id.toString(), 10);
     const item = await storage.itemById(tmpid);
@@ -80,7 +92,11 @@ app.get("/edit", async (req, res) => {
   }
 });
 
-app.post("/edition", (req, res) => {
+app.post("/edition", auth, (req, res) => {
+  if (req.auth === undefined) {
+    res.send("404");
+    console.log(req.auth);
+  }
   const tmpid = parseInt(req.query.id.toString(), 10);
   const value = req.body.text;
   if (!storage.edit(tmpid, value) & req.auth) {
