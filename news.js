@@ -3,7 +3,7 @@ const config = require("./config.json");
 class News {
   constructor() {
     this.pool = new pg.Pool({
-      user: config.user, // process.env.
+      user: config.user, 
       host: config.host,
       database: config.database,
       password: config.password,
