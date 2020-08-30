@@ -82,4 +82,6 @@ app.get("/organizers", Pages.organizers);
 
 app.get("/partners", Pages.partners);
 
+app.get("/help", Pages.help);
+
 app.listen(3000);

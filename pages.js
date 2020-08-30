@@ -18,6 +18,10 @@ class Controller {
   partners(req, res) {
     res.render("partners");
   }
+
+  help(req, res) {
+    res.render("help");
+  }
 }
 
 module.exports = Controller;
