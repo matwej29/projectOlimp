@@ -3,7 +3,7 @@ const config = require("./config.json");
 class News {
   constructor() {
     this.pool = new pg.Pool({
-      user: config.user, 
+      user: config.user,
       host: config.host,
       database: config.database,
       password: config.password,
@@ -51,9 +51,9 @@ class News {
     client.release();
   }
 
-  async edit(id, value) {
-    let text = `UPDATE news SET text=$1 WHERE id=$2`;
-    let values = [value, parseInt(id)];
+  async edit(id, item) {
+    let text = `UPDATE news SET header=$1, text=$2 WHERE id=$3`;
+    let values = [item.header, item.text, parseInt(id)];
     const client = await this.pool.connect();
     try {
       await client.query(text, values);

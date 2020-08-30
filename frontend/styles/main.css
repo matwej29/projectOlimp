@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(180deg, #bac8e0 0%, #6a85b6 100%);
+  background: linear-gradient(180deg, #bac8e0 0%, #719ae6 100%);
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ body {
   margin-right: 3px;
   width: 20px;
   height: 18px;
-  background-color: chocolate;
+  background-color: whitesmoke;
 }
 
 .each-list-container {
@@ -31,6 +31,7 @@ body {
 
 .content_main-block {
   width: auto;
+  max-width: 100vh;
   box-sizing: border-box;
   background-color: aliceblue;
   flex-direction: column;

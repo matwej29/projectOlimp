@@ -2,7 +2,9 @@
     <div class="column-reverse">
         {{#each this.list}}
         <div class="each-list-container centering column">
-            <div class="list-container__header">{{this.header}}</div>
+            <div class="list-container__header">
+                <h1>{{this.header}}</h1>
+            </div>
             <div class="list-container__text">{{{ this.text }}}</div>
         </div>
         {{/each}}

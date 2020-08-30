@@ -53,44 +53,26 @@ app.get("/home", async (req, res) => {
 app.get("/add", auth, adminPages.add);
 
 app.post("/add", auth, async (req, res) => {
-  if (req.auth !== undefined) {
-    storage.add(req.body.header, req.body.text);
-    res.redirect("/admin");
-  } else {
-    res.send("404");
-  }
+  storage.add(req.body.header, req.body.text);
+  res.redirect("/admin");
 });
 
 app.get("/delete", auth, (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
-  if (req.auth !== undefined) {
-    storage.delete(tmpid);
-    res.redirect("/admin");
-  } else {
-    Pages.status404(res);
-  }
+  storage.delete(tmpid);
+  res.redirect("/admin");
 });
 
 app.get("/edit", auth, async (req, res) => {
   const tmpid = parseInt(req.query.id.toString(), 10);
   const item = await storage.itemById(tmpid);
-  const header = await item.header;
-  if (req.auth !== undefined) {
-    adminPages.edit(req, res, tmpid, header);
-  } else {
-    Pages.status404(res);
-  }
+  adminPages.edit(req, res, item);
 });
 
 app.post("/edition", auth, (req, res) => {
-  if (req.auth !== undefined) {
-    const tmpid = parseInt(req.query.id.toString(), 10);
-    const value = req.body.text;
-    storage.edit(tmpid, value);
-    res.redirect("/admin");
-  } else {
-    Pages.status404(res);
-  }
+  const tmpid = parseInt(req.query.id.toString(), 10);
+  storage.edit(req.query.id, req.body);
+  res.redirect("/admin");
 });
 
 app.get("/organizers", Pages.organizers);

@@ -6,8 +6,8 @@ class Controller {
     res.render("addition");
   }
 
-  edit(req, res, tmpid, header) {
-    res.render("edit", { tmpid:tmpid, header:header});
+  edit(req, res, item) {
+    res.render("edit", { item });
   }
 }
 

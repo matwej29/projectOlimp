@@ -1,11 +1,7 @@
-<form action="{{#if action_is_edit}}/{{action}}?id={{tmpid}}{{else}}/{{action}}{{/if}}" method="post">
+<form action="{{#if action_is_edit}}/{{action}}?id={{this.item.id}}{{else}}/{{action}}{{/if}}" method="post">
     <div class="content_main-block centering">
-        {{#if action_is_edit}}
-        <h3>{{this.header}}</h3>
-        {{else}}
-        <input type="text" placeholder={{this.header}} name=header class="input-container__input" />
-        {{/if}}
-        <div><textarea cols="30" name=text></textarea></div>
+        <input type="text" value="{{this.item.header}}" name="header" class="input-container__input" />
+        <div><textarea cols="30" name="text" id="editArea">{{this.item.text}}</textarea></div>
         <button type="submit" class="add__action background-image_when-svg action__icon-add"></button>
     </div>
 </form>
