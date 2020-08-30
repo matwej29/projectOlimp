@@ -64,19 +64,16 @@ app.post("/add", auth, async (req, res) => {
 });
 
 app.get("/delete", auth, (req, res) => {
-  const tmpid = parseInt(req.query.id.toString(), 10);
-  storage.delete(tmpid);
+  storage.delete(req.query.id);
   res.redirect("/admin");
 });
 
 app.get("/edit", auth, async (req, res) => {
-  const tmpid = parseInt(req.query.id.toString(), 10);
-  const item = await storage.itemById(tmpid);
+  const item = await storage.itemById(req.query.id);
   adminPages.edit(req, res, item);
 });
 
 app.post("/edition", auth, (req, res) => {
-  const tmpid = parseInt(req.query.id.toString(), 10);
   storage.edit(req.query.id, req.body);
   res.redirect("/admin");
 });
