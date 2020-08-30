@@ -33,21 +33,27 @@ app.get("/", function (req, res) {
 });
 
 app.get("/admin", auth, async (req, res) => {
-  let temps = await storage.news();
-  temps.forEach(async (element) => {
+  let templist = await storage.news();
+  templist.sort(function (a, b) {
+    return a.id - b.id;
+  });
+  templist.forEach(async (element) => {
     element.text = marked(element.text);
   });
-  adminPages.home(temps, req, res);
+  adminPages.home(templist, req, res);
 });
 
 app.get("/info", Pages.info);
 
 app.get("/home", async (req, res) => {
-  let temps = await storage.news();
-  temps.forEach(async (element) => {
+  let templist = await storage.news();
+  templist.sort(function (a, b) {
+    return a.id - b.id;
+  });
+  templist.forEach(async (element) => {
     element.text = marked(element.text);
   });
-  Pages.home(temps, req, res);
+  Pages.home(templist, req, res);
 });
 
 app.get("/add", auth, adminPages.add);
