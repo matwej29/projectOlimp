@@ -8,7 +8,7 @@ const storage = new Storage();
 
 class Controller {
   info(req, res) {
-    res.render("info");
+    res.render("info", {style_info: "active-button"});
   }
 
   async home(req, res) {
@@ -21,7 +21,7 @@ class Controller {
       let s = element.date.toString();
       element.date = (s[8]+s[9]+"."+s[5]+s[6]+"."+s[2]+s[3]).toString();
     });
-    res.render("home", { list: templist });
+    res.render("home", { list: templist, style_home: "active-button"});
   }
 
   status404(res) {
@@ -29,15 +29,15 @@ class Controller {
   }
 
   organizers(req, res) {
-    res.render("organizers");
+    res.render("organizers", {style_org: "active-button"});
   }
 
   partners(req, res) {
-    res.render("partners");
+    res.render("partners", {style_part: "active-button"});
   }
 
   help(req, res) {
-    res.render("help");
+    res.render("help", {style_help: "active-button"});
   }
 
   async teams(req, res) {
@@ -49,7 +49,7 @@ class Controller {
       element.description = null ? "" : element.description;
       element.description = marked(element.description);
     });
-    res.render("teams", { list: templist });
+    res.render("teams", { list: templist, style_teams: "active-button"});
   }
 }
 

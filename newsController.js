@@ -8,6 +8,7 @@ class Controller {
       areaName: "text",
       action: "/admin/news/add",
       layout: "layoutA",
+      style_admin: "active-button"
     });
   }
 
@@ -29,7 +30,8 @@ class Controller {
       secondValue: item.text,
       inputName: "header",
       areaName: "text",
-      layout: "layoutA"
+      layout: "layoutA", 
+      style_admin: "active-button"
     });
   }
 

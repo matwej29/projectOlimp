@@ -18,7 +18,7 @@ class Controller {
       let s = element.date.toString();
       element.date = (s[8]+s[9]+"."+s[5]+s[6]+"."+s[2]+s[3]).toString();
     });
-    res.render("homeA", { list: templist, layout: "layoutA" });
+    res.render("homeA", { list: templist, layout: "layoutA", style_admin: "active-button"});
   }
 
   async teams(req, res) {
@@ -30,7 +30,7 @@ class Controller {
       element.description = null ? "" : element.description;
       element.description = marked(element.description);
     });
-    res.render("teamsA", { list: templist, layout: "layoutA" });
+    res.render("teamsA", { list: templist, layout: "layoutA", style_teams: "active-button"});
   }
 }
 
