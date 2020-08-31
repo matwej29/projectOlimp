@@ -1,0 +1,12 @@
+<div class="content_main-block centering">
+    <div class="column-reverse">
+        {{#each this.list}}
+        <div class="each-list-container centering column">
+            <div class="list-container__header">
+                <h1>{{this.name}}</h1>
+            </div>
+            <div class="list-container__text">{{{ this.description }}}</div>
+        </div>
+        {{/each}}
+    </div>
+</div>

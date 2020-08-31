@@ -15,10 +15,11 @@ const Pages = new pagesController();
 const adminController = require("./adminPages.js");
 const adminPages = new adminController();
 
-const Storage = require("./news.js");
-const storage = new Storage();
+const NewsController = require("./newsController.js");
+const newsController = new NewsController();
 
-const marked = require("marked");
+const TeamsController = require("./teamsController.js");
+const teamsController = new TeamsController();
 
 const basicAuth = require("express-basic-auth");
 
@@ -32,56 +33,44 @@ app.get("/", function (req, res) {
   res.redirect("/home");
 });
 
-app.get("/admin", auth, async (req, res) => {
-  let templist = await storage.news();
-  templist.sort(function (a, b) {
-    return a.id - b.id;
-  });
-  templist.forEach(async (element) => {
-    element.text = marked(element.text);
-  });
-  adminPages.home(templist, req, res);
-});
-
 app.get("/info", Pages.info);
 
-app.get("/home", async (req, res) => {
-  let templist = await storage.news();
-  templist.sort(function (a, b) {
-    return a.id - b.id;
-  });
-  templist.forEach(async (element) => {
-    element.text = marked(element.text);
-  });
-  Pages.home(templist, req, res);
-});
-
-app.get("/add", auth, adminPages.add);
-
-app.post("/add", auth, async (req, res) => {
-  storage.add(req.body.header, req.body.text);
-  res.redirect("/admin");
-});
-
-app.get("/delete", auth, (req, res) => {
-  storage.delete(req.query.id);
-  res.redirect("/admin");
-});
-
-app.get("/edit", auth, async (req, res) => {
-  const item = await storage.itemById(req.query.id);
-  adminPages.edit(req, res, item);
-});
-
-app.post("/edition", auth, (req, res) => {
-  storage.edit(req.query.id, req.body);
-  res.redirect("/admin");
-});
+app.get("/home", Pages.home);
 
 app.get("/organizers", Pages.organizers);
 
 app.get("/partners", Pages.partners);
 
 app.get("/help", Pages.help);
+
+app.get("/teams", Pages.teams);
+
+app.get("/admin", auth, adminPages.home);
+
+app.get("/admin/news/add", auth, newsController.getAdd);
+
+app.post("/admin/news/add", auth, newsController.postAdd);
+
+app.get("/admin/news/delete", auth, newsController.delete);
+
+app.get("/admin/news/edit", auth, newsController.getEdit);
+
+app.post("/admin/news/edit", auth, newsController.postEdit);
+
+app.get("/admin/teams", adminPages.teams);
+
+app.get("/admin/teams/edit", auth, teamsController.getEdit);
+
+app.post("/admin/teams/edit", auth, teamsController.postEdit);
+
+app.get("/admin/teams/add", auth, teamsController.getAdd);
+
+app.post("/admin/teams/add", auth, teamsController.postAdd);
+
+app.get("/admin/teams/delete", auth, teamsController.delete);
+
+app.get("/admin/teams/edit", auth, teamsController.getEdit);
+
+app.post("/admin/teams/edit", auth, teamsController.postEdit);
 
 app.listen(3000);
