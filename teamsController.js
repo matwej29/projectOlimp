@@ -8,6 +8,7 @@ class Controller {
       areaName: "description",
       action: "/admin/teams/add",
       layout: "layoutA",
+      style_teams: "active-button"
     });
   }
 
@@ -30,6 +31,7 @@ class Controller {
       inputName: "name",
       areaName: "description",
       layout: "layoutA",
+      style_teams: "active-button",
     });
   }
 
