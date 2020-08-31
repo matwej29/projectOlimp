@@ -7,6 +7,7 @@ class Controller {
       inputName: "name",
       areaName: "description",
       action: "/admin/teams/add",
+      layout: "layoutA",
     });
   }
 
@@ -28,6 +29,7 @@ class Controller {
       secondValue: item.description,
       inputName: "name",
       areaName: "description",
+      layout: "layoutA",
     });
   }
 
