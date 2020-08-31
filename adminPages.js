@@ -15,6 +15,8 @@ class Controller {
     templist.forEach(async (element) => {
       element.text = null ? "" : element.text;
       element.text = marked(element.text);
+      let s = element.date.toString();
+      element.date = (s[8]+s[9]+"."+s[5]+s[6]+"."+s[2]+s[3]).toString();
     });
     res.render("homeA", { list: templist, layout: "layoutA" });
   }
