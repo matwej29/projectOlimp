@@ -3,10 +3,9 @@
         {{#each this.list}}
         <div class="each-list-container centering column">
             <div class="list-container__header">
-                <h1>{{this.header}}</h1>
+                <h1>{{this.name}}</h1>
             </div>
-            <div class="list-container__text">{{{ this.text }}}</div>
-            <div class="list-container__date">{{this.date}}</div>
+            <div class="list-container__text">{{{ this.description }}}</div>
         </div>
         {{/each}}
     </div>

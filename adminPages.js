@@ -1,13 +1,36 @@
+const marked = require("marked");
+
+const Storage = require("./news.js");
+const storage = new Storage();
+
+const BDteam = require("./teams.js");
+const dbTeam = new BDteam();
+
 class Controller {
-  home(list, req, res) {
-    res.render("homeA", { list: list });
-  }
-  add(req, res) {
-    res.render("addition");
+  async home(req, res) {
+    let templist = await storage.news();
+    templist.sort(function (a, b) {
+      return a.id - b.id;
+    });
+    templist.forEach(async (element) => {
+      element.text = null ? "" : element.text;
+      element.text = marked(element.text);
+      let s = element.date.toString();
+      element.date = (s[8]+s[9]+"."+s[5]+s[6]+"."+s[2]+s[3]).toString();
+    });
+    res.render("homeA", { list: templist, layout: "layoutA" });
   }
 
-  edit(req, res, item) {
-    res.render("edit", { item });
+  async teams(req, res) {
+    let templist = await dbTeam.teams();
+    templist.sort(function (a, b) {
+      return a.id - b.id;
+    });
+    templist.forEach(async (element) => {
+      element.description = null ? "" : element.description;
+      element.description = marked(element.description);
+    });
+    res.render("teamsA", { list: templist, layout: "layoutA" });
   }
 }
 

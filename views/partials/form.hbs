@@ -1,7 +1,7 @@
-<form action="{{#if action_is_edit}}/{{action}}?id={{this.item.id}}{{else}}/{{action}}{{/if}}" method="post">
+<form action="{{action}}" method="post">
     <div class="content_main-block centering">
-        <input type="text" value="{{this.item.header}}" name="header" class="input-container__input" />
-        <div><textarea cols="30" name="text" id="editArea">{{this.item.text}}</textarea></div>
+        <input type="text" value="{{firstValue}}" name="{{ inputName }}" class="input-container__input" />
+        <div><textarea cols="30" name="{{ areaName }}" id="editArea">{{ secondValue }}</textarea></div>
         <button type="submit" class="add__action background-image_when-svg action__icon-add"></button>
     </div>
 </form>
