@@ -66,19 +66,24 @@ body {
   margin-right: 2vw;
   align-items: center;
   font-size: 20px;
-  font-weight: normal;  
+  font-weight: normal;
   height: 37px;
 }
 
-.menu__action:hover{
+.menu__action:hover {
   cursor: pointer;
-  border-bottom: 3px solid rgb(156, 247, 120);
-  color: rgb(156, 247, 120);
+  /* border-bottom: 3px solid rgb(156, 247, 120); */
+  border-bottom: 3px solid #4361ee;
+  /* color: rgb(156, 247, 120); */
+  color: #4361ee;
 }
 
-.active-button{
-  border-bottom: 3px solid rgb(156, 247, 120);
-  color: rgb(156, 247, 120);
+.active-button {
+  /* border-bottom: 3px solid rgb(156, 247, 120);
+  color: rgb(156, 247, 120); */
+  color: #4361ee;
+  border-bottom: 3px solid #4361ee;
+  /* https://coolors.co/palettes/trending */
 }
 
 .centering {
@@ -159,7 +164,7 @@ body {
   float: right;
 }
 
-.footer{
+.footer {
   box-sizing: border-box;
   background: #262526;
   padding-left: 11vw;
@@ -175,11 +180,11 @@ body {
   justify-content: space-between;
 }
 
-.footer__items{
-  color: #FFFFFF;
+.footer__items {
+  color: #ffffff;
   font-size: 18px;
 }
 
-.developers{
+.developers {
   font-size: 16px;
 }
