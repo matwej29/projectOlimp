@@ -68,7 +68,7 @@ body {
   margin-right: 2vw;
   align-items: center;
   margin-top: 1.7vh;
-  font-size: 1.9vh;
+  font-size: 2vh;
   font-weight: normal;
   height: 3.42592vh;
 }
@@ -98,6 +98,7 @@ body {
 .list-container__header {
   font-size: 1.7vh;
   width: 65vw;
+  margin-top: 2vh;
 }
 
 .column {
@@ -168,7 +169,7 @@ body {
 }
 
 .header_text {
-  width: 80%;
+  width: 70%;
   margin-bottom: 4vh;
   font-size: 2vh;
   margin-left: 2vw;
@@ -177,7 +178,7 @@ body {
 
 .header-img {
   margin-right: 4vw;
-  width: 150%;
+  width: 50vw;
 }
 
 .header_content {
@@ -237,7 +238,7 @@ body {
 .inpage_content {
   flex: 1 0 auto;
   padding: 20px;
-  margin-bottom: 6vh;
+  margin-bottom: 5vh;
 }
 
 .page_name {
@@ -245,4 +246,9 @@ body {
   margin-left: 5vw;
   font-size: 2vh;
   color: #221f3b;
+}
+
+.list-container__date {
+  color: #221f3b;
+  margin-bottom: 3vh;
 }
