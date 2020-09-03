@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Kumbh Sans";
+  src: url(https://fonts.google.com/specimen/Kumbh+Sans);
+}
+
 body {
   background: linear-gradient(#b2c4ec, #c7bee5);
   min-height: 100vh;
