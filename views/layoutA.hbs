@@ -10,14 +10,17 @@
 
 <body class="centering">
     <div>{{>menuA}}</div>
-    <div class="column">
-        <div class="inpage-header each-list-container column">
+    <div class="inpage_content column">
+        <div class="inpage-header each-list-container">
             <div class="header_content">
                 <div class="header_title">
                     <img class="spaced" src="/static/img/logo.svg" width="100px">
                     <h1 class="header_title-text">Проектный Олимп</h1>
                 </div>
             </div>
+        </div>
+        <div class="page_name">
+            <h1>{{page_name}}</h1>
         </div>
         {{{body}}}
     </div>

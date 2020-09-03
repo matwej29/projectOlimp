@@ -8,7 +8,7 @@ const storage = new Storage();
 
 class Controller {
   info(req, res) {
-    res.render("info", { style_info: "active-button", page_name: "Партнеры" });
+    res.render("info", { style_info: "active-button", page_name: "Положение" });
   }
 
   async home(req, res) {
@@ -25,7 +25,7 @@ class Controller {
     res.render("home", {
       list: templist,
       style_home: "active-button",
-      page_name: "Партнеры",
+      page_name: "Новости",
     });
   }
 
@@ -36,7 +36,7 @@ class Controller {
   organizers(req, res) {
     res.render("organizers", {
       style_org: "active-button",
-      page_name: "Партнеры",
+      page_name: "Организаторы",
     });
   }
 
@@ -48,7 +48,10 @@ class Controller {
   }
 
   help(req, res) {
-    res.render("help", { style_help: "active-button", page_name: "Партнеры" });
+    res.render("help", { 
+      style_help: "active-button",
+      page_name: "Помощь"
+    });
   }
 
   async teams(req, res) {
