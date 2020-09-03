@@ -35,7 +35,7 @@ body {
   max-width: 80vw;
   box-sizing: border-box;
   flex-direction: column;
-  margin-top: 8vh;
+  margin-top: 2vh;
   margin-bottom: 3vh;
 }
 
@@ -108,7 +108,6 @@ body {
 .row {
   display: flex;
   flex-direction: row;
-  align-content: space-around;
 }
 
 .action__icon-delete {
@@ -144,7 +143,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 74vw;
-  margin-top: 9vh;
+  margin-top: 8vh;
   padding-left: 3vw;
   padding-right: 3vw;
 }
@@ -153,7 +152,6 @@ body {
   margin-left: 3vw;
   margin-right: 2vw;
 }
-
 
 .header_title-text {
   font-size: 40px;
@@ -196,10 +194,10 @@ body {
   background: #262526;
   padding-left: 11vw;
   padding-right: 11vw;
-  position: fixed;
+  position: static;
   bottom: 0;
   left: 0;
-  min-width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   height: 9vh;
@@ -234,4 +232,8 @@ body {
 
 .partner_ref-img {
   margin-left: 2vw;
+}
+
+.inpage_content {
+  flex: 1 0 auto;
 }
