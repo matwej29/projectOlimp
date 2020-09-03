@@ -8,7 +8,7 @@ const storage = new Storage();
 
 class Controller {
   info(req, res) {
-    res.render("info", {style_info: "active-button"});
+    res.render("info", { style_info: "active-button", page_name: "Партнеры" });
   }
 
   async home(req, res) {
@@ -19,9 +19,14 @@ class Controller {
     templist.forEach(async (element) => {
       element.text = marked(element.text);
       let s = element.date.toString();
+      //prettier-ignore
       element.date = (s[8]+s[9]+"."+s[5]+s[6]+"."+s[2]+s[3]).toString();
     });
-    res.render("home", { list: templist, style_home: "active-button"});
+    res.render("home", {
+      list: templist,
+      style_home: "active-button",
+      page_name: "Партнеры",
+    });
   }
 
   status404(res) {
@@ -29,15 +34,21 @@ class Controller {
   }
 
   organizers(req, res) {
-    res.render("organizers", {style_org: "active-button"});
+    res.render("organizers", {
+      style_org: "active-button",
+      page_name: "Партнеры",
+    });
   }
 
   partners(req, res) {
-    res.render("partners", {style_part: "active-button"});
+    res.render("partners", {
+      style_part: "active-button",
+      page_name: "Партнеры",
+    });
   }
 
   help(req, res) {
-    res.render("help", {style_help: "active-button"});
+    res.render("help", { style_help: "active-button", page_name: "Партнеры" });
   }
 
   async teams(req, res) {
@@ -49,7 +60,11 @@ class Controller {
       element.description = null ? "" : element.description;
       element.description = marked(element.description);
     });
-    res.render("teams", { list: templist, style_teams: "active-button"});
+    res.render("teams", {
+      list: templist,
+      style_teams: "active-button",
+      page_name: "Партнеры",
+    });
   }
 }
 
