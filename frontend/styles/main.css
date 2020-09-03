@@ -35,13 +35,13 @@ body {
   max-width: 80vw;
   box-sizing: border-box;
   flex-direction: column;
-  margin-top: 8vh;
+  margin-top: 2vh;
   margin-bottom: 3vh;
 }
 
 .list-container__text {
   min-width: 120px;
-  width: auto;
+  width: 70vw;
   box-sizing: border-box;
   margin-left: 10px;
   background-color: white;
@@ -105,6 +105,11 @@ body {
   flex-direction: column;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
 .action__icon-delete {
   background-image: url(../assets/svg/delete_button.svg);
 }
@@ -138,7 +143,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 74vw;
-  margin-top: 10vh;
+  margin-top: 8vh;
   padding-left: 3vw;
   padding-right: 3vw;
 }
@@ -147,7 +152,6 @@ body {
   margin-left: 3vw;
   margin-right: 2vw;
 }
-
 
 .header_title-text {
   font-size: 40px;
@@ -169,7 +173,7 @@ body {
 .header_text {
   width: 80%;
   margin-bottom: 4vh;
-  font-size: 20px;
+  font-size: 2vh;
   margin-left: 2vw;
 }
 
@@ -182,6 +186,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 2vh;
+  margin-bottom: 1vh;
 }
 
 .footer {
@@ -189,10 +194,10 @@ body {
   background: #262526;
   padding-left: 11vw;
   padding-right: 11vw;
-  position: fixed;
+  position: static;
   bottom: 0;
   left: 0;
-  min-width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   height: 9vh;
@@ -213,7 +218,7 @@ body {
   /* не работает */
   overflow-wrap: break-word;
 
-  font-size: medium;
+  font-size: 2vh;
 }
 .partner_ref {
   display: flex;
@@ -227,4 +232,8 @@ body {
 
 .partner_ref-img {
   margin-left: 2vw;
+}
+
+.inpage_content {
+  flex: 1 0 auto;
 }

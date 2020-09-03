@@ -8,35 +8,37 @@
 
 <body class="centering">
     <div>{{>menu}}</div>
-    <div class="column">
-        <div class="inpage-header each-list-container column ">
-            <div class="header_content">
-                <div class="header_title">
-                    <img class="spaced" src="/static/img/logo.svg" width="100px">
-                    <h1 class="header_title-text">Проектный Олимп</h1>
+    <div class="inpage_content">
+        <div class="column">
+            <div class="inpage-header each-list-container column ">
+                <div class="header_content">
+                    <div class="header_title">
+                        <img class="spaced" src="/static/img/logo.svg" width="100px">
+                        <h1 class="header_title-text">Проектный Олимп</h1>
+                    </div>
+                    <p class="header_text">Какая разница, это и 10 минут не составит какая разница, это и 10 минут
+                        не составит какая
+                        разница, это и
+                        10
+                        минут не составит какая разница, это и 10 минут не составит какая разница, это и 10 минут не
+                        составит
+                        какая
+                        разница, это и 10 минут не составит какая разница, это и 10 минут не составит какая разница,
+                        это
+                        и 10
+                        минут
+                        не составит какая разница, это и 10 минут не составит какая разница, это и 10 минут не
+                        составит
+                        какая
+                        разница, это и 10 минут не составит</p>
                 </div>
-                <p class="header_text">Какая разница, это и 10 минут не составит какая разница, это и 10 минут
-                    не составит какая
-                    разница, это и
-                    10
-                    минут не составит какая разница, это и 10 минут не составит какая разница, это и 10 минут не
-                    составит
-                    какая
-                    разница, это и 10 минут не составит какая разница, это и 10 минут не составит какая разница,
-                    это
-                    и 10
-                    минут
-                    не составит какая разница, это и 10 минут не составит какая разница, это и 10 минут не
-                    составит
-                    какая
-                    разница, это и 10 минут не составит</p>
+                <img class="header-img" src="/static/img/header-img.svg">
             </div>
-            <img class="header-img" src="/static/img/header-img.svg">
+            <div class="pagename">
+                {{page_name}}
+            </div>
+            {{{body}}}
         </div>
-        <div class="pagename">
-            {{page_name}}
-        </div>
-        {{{body}}}
     </div>
     {{>footer}}
     <script src="/static/bundle/index.js"></script>
