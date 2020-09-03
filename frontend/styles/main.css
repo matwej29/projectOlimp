@@ -215,11 +215,10 @@ body {
 }
 
 .list-container__text p {
-  /* не работает */
   overflow-wrap: break-word;
-
   font-size: 2vh;
 }
+
 .partner_ref {
   display: flex;
   flex-direction: row;
@@ -249,6 +248,23 @@ body {
 }
 
 .list-container__date {
-  color: #221f3b;
+  color: #ffffff;
   margin-bottom: 3vh;
+  margin-left: 6vw;
+  padding: 0.3%;
+  background-color: #6c63ff;
+  border-radius: 5px;
+  align-self: flex-start;
+}
+
+@media only screen and (min-width: 480px) {
+  .header-img {
+    width: 0px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .header-img {
+    width: 20vw;
+  }
 }
