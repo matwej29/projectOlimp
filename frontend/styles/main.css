@@ -189,7 +189,9 @@ body {
   color: #221f3b;
 }
 
-.header-img {
+.content-img {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   margin-left: 9vw;
 }
 
@@ -240,6 +242,7 @@ body {
 .partner_ref h1 {
   font-family: "Proxima Nova", "Open Sans", sans-serif;
   color: #221f3b;
+  font-size: 10vh;
   margin-right: 2vw;
 }
 
@@ -268,14 +271,53 @@ body {
   width: auto;
 }
 
-@media only screen and (max-width: 480px) {
-  .header-img {
+.info-block {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+}
+
+.info-block_text {
+  margin-right: 10vw;
+  margin-left: 10vw;
+  font-size: 2vh;
+}
+
+@media only screen and (min-width: 480px) {
+  .content-img {
     width: 0vw;
   }
 
   .list-container__text p {
-    font-size: 1.2vw;
+    font-size: 2vh;
   }
+
+  .list-container__header {
+    font-size: 1.5vh;
+  }
+
+  .partner-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .partner_ref {
+    align-items: center;
+    margin-top: 1vh;
+    margin-left: 3vw;
+    margin-right: 0;
+    margin-bottom: 1vh;
+    width: 30vh;
+  }
+
+  .partner_ref h1 {
+    font-size: 2.1vh;
+  }
+
+  .partner_ref img {
+    height: 150px;
+  }
+
   .info-block {
     display: flex;
     flex-direction: column;
@@ -283,24 +325,26 @@ body {
   }
 
   .info-block_text {
-    margin-right: 10vw;
+    margin-left: 5vw;
+    margin-right: auto;
     font-size: 2vh;
-  }
-
-  .info-block_img {
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-    margin-left: 9vw;
   }
 }
 
-@media only screen and (max-width: 1920x) {
-  .header-img {
+@media only screen and (min-width: 1920px) {
+  .content-img {
     width: 20vw;
   }
 
   .list-container__text p {
-    font-size: 1.2vw;
+    font-size: 2vh;
+  }
+
+  .partner_ref h1 {
+    font-family: "Proxima Nova", "Open Sans", sans-serif;
+    color: #221f3b;
+    font-size: 4vh;
+    margin-right: 2vw;
   }
 }
 
