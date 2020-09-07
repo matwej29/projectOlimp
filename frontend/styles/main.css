@@ -222,11 +222,6 @@ body {
   font-size: 1.481413vh;
 }
 
-.list-container__text p {
-  overflow-wrap: break-word;
-  font-size: 2vh;
-}
-
 .partner_ref {
   display: flex;
   flex-direction: row;
@@ -263,17 +258,26 @@ body {
   background-color: #6c63ff;
   border-radius: 5px;
   align-self: flex-start;
+  width: auto;
 }
 
 @media only screen and (max-width: 480px) {
   .header-img {
     width: 0vw;
   }
+
+  .list-container__text p {
+    font-size: 2vw;
+  }
 }
 
 @media only screen and (max-width: 1920x) {
   .header-img {
     width: 20vw;
+  }
+
+  .list-container__text p {
+    font-size: 1.2vw;
   }
 }
 
