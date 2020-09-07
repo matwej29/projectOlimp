@@ -52,6 +52,7 @@ body {
   width: 70vw;
   box-sizing: border-box;
   margin-left: 10px;
+  margin-bottom: 1vh;
   background-color: white;
 }
 
@@ -67,7 +68,7 @@ body {
   padding-left: 11vw;
   background-color: #1f1f1f;
   min-width: 100vw;
-  min-height: 3.3vw;
+  /* min-height: 3.3vw; */
   position: fixed;
   top: 0;
   left: 0;
@@ -177,12 +178,12 @@ body {
 .header_title {
   display: flex;
   flex-direction: row;
-  margin-bottom: 2vh;
+  margin-bottom: 1vh;
   font-size: 1.8518518vh;
 }
 
 .header_text {
-  margin-bottom: 4vh;
+  margin-bottom: 0;
   font-size: 2vh;
   margin-left: 2vw;
   color: #221f3b;
@@ -196,8 +197,9 @@ body {
   display: flex;
   flex-direction: column;
   flex-basis: 38vw;
-  margin-top: 2vh;
-  margin-bottom: 1vh;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  padding-bottom: 1vh;
 }
 
 .footer {
@@ -257,8 +259,8 @@ body {
 
 .list-container__date {
   color: #ffffff;
-  margin-bottom: 3vh;
-  margin-left: 6vw;
+  margin-top: -2vh;
+  margin-left: 5vw;
   padding: 0.3%;
   background-color: #6c63ff;
   border-radius: 5px;
@@ -308,4 +310,5 @@ body {
 
 .inner-position-regulation {
   padding: 3vw;
+  box-sizing: border-box;
 }
