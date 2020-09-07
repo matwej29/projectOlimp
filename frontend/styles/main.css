@@ -28,6 +28,7 @@ body {
 }
 
 .each-list-container {
+  box-sizing: content-box;
   width: 80vw;
   min-width: 200px;
   background-color: white;
@@ -53,7 +54,7 @@ body {
 }
 
 .menu-above {
-  box-sizing: border-box;
+  box-sizing: content-box;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
