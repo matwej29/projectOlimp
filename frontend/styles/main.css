@@ -1,6 +1,8 @@
 @font-face {
-  font-family: "Kumbh Sans";
-  src: url(https://fonts.google.com/specimen/Kumbh+Sans);
+  font-family: "Proxima Nova", sans-serif;
+  src: local("Proxima Nova"), url(/styles/fonts/ProximaNova-Bold.ttf);
+  font-style: normal;
+  font-weight: normal;
 }
 
 body {
@@ -104,9 +106,12 @@ body {
 }
 
 .list-container__header {
+  font-family: "Proxima Nova", "Open Sans", sans-serif;
   font-size: 1.7vh;
   width: 65vw;
   margin-top: 2vh;
+  margin-left: 5.2vw;
+  align-self: flex-start;
 }
 
 .column {
@@ -152,7 +157,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 74vw;
-  margin-top: 8vh;
+  margin-top: 6vh;
   padding-left: 3vw;
   padding-right: 3vw;
 }
@@ -163,7 +168,8 @@ body {
 }
 
 .header_title-text {
-  font-size: 4vh;
+  font-family: "Proxima Nova", "Open Sans", sans-serif;
+  font-size: 5vh;
   margin-top: 5vh;
   color: #221f3b;
 }
@@ -172,12 +178,10 @@ body {
   display: flex;
   flex-direction: row;
   margin-bottom: 2vh;
-  margin-left: 2vw;
   font-size: 1.8518518vh;
 }
 
 .header_text {
-  width: 70%;
   margin-bottom: 4vh;
   font-size: 2vh;
   margin-left: 2vw;
@@ -185,13 +189,13 @@ body {
 }
 
 .header-img {
-  margin-right: 4vw;
-  width: 50vw;
+  margin-left: 9vw;
 }
 
 .header_content {
   display: flex;
   flex-direction: column;
+  flex-basis: 38vw;
   margin-top: 2vh;
   margin-bottom: 1vh;
 }
@@ -223,18 +227,18 @@ body {
 }
 
 .partner_ref {
-  display: flex;
-  flex-direction: row;
   align-items: center;
   margin-top: 4vh;
   margin-left: 6vw;
   margin-right: 5vw;
   margin-bottom: 4vh;
-  color: #221f3b;
+  width: 50vw;
 }
 
-.partner_ref-img {
-  margin-left: 2vw;
+.partner_ref h1 {
+  font-family: "Proxima Nova", "Open Sans", sans-serif;
+  color: #221f3b;
+  margin-right: 2vw;
 }
 
 .inpage_content {
@@ -246,6 +250,7 @@ body {
 .page_name {
   margin-top: 2vh;
   margin-left: 5vw;
+  font-family: "Proxima Nova", "Open Sans", sans-serif;
   font-size: 2vh;
   color: #221f3b;
 }
@@ -261,13 +266,29 @@ body {
   width: auto;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (min-width: 480px) {
   .header-img {
     width: 0vw;
   }
 
   .list-container__text p {
-    font-size: 2vw;
+    font-size: 1.2vw;
+  }
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+  }
+
+  .info-block_text {
+    margin-right: 10vw;
+    font-size: 2vh;
+  }
+
+  .info-block_img {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-left: 9vw;
   }
 }
 
