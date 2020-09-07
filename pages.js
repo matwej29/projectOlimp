@@ -66,7 +66,7 @@ class Controller {
     res.render("teams", {
       list: templist,
       style_teams: "active-button",
-      page_name: "Партнеры",
+      page_name: "Команды",
     });
   }
 }
