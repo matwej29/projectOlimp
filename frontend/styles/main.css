@@ -20,8 +20,8 @@ body {
 }
 .list-container__action {
   position: relative;
-  width: 20px;
-  height: 18px;
+  min-width: 2vw;
+  min-height: 2vw;
   margin-bottom: 1vh;
   padding: 1vh;
   background-color: #1f1f1f;
@@ -65,9 +65,11 @@ body {
   padding-left: 11vw;
   background-color: #1f1f1f;
   min-width: 100vw;
+  min-height: 3.3vw;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
 .menu__action {
@@ -263,14 +265,18 @@ body {
   align-self: flex-start;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (max-width: 480px) {
   .header-img {
-    width: 0px;
+    width: 0vw;
   }
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (max-width: 1920x) {
   .header-img {
     width: 20vw;
   }
+}
+
+.input-container__input {
+  max-width: 35vw;
 }
