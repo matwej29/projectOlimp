@@ -266,7 +266,7 @@ body {
   width: auto;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (max-width: 480px) {
   .header-img {
     width: 0vw;
   }
@@ -304,4 +304,8 @@ body {
 
 .input-container__input {
   max-width: 35vw;
+}
+
+.inner-position-regulation {
+  padding: 3vw;
 }
