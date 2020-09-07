@@ -67,7 +67,6 @@ body {
   padding-left: 11vw;
   background-color: #1f1f1f;
   min-width: 100vw;
-  min-height: 3.3vw;
   position: fixed;
   top: 0;
   left: 0;
@@ -266,7 +265,7 @@ body {
   width: auto;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (min-width: 480px) {
   .header-img {
     width: 0vw;
   }
@@ -292,7 +291,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 1920x) {
+@media only screen and (min-width: 1440px) {
   .header-img {
     width: 20vw;
   }
@@ -307,5 +306,6 @@ body {
 }
 
 .inner-position-regulation {
+  box-sizing: border-box;
   padding: 3vw;
 }
