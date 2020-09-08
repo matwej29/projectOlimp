@@ -54,6 +54,7 @@ body {
   margin-left: 10px;
   margin-bottom: 1vh;
   background-color: white;
+  font-size: 2vh;
 }
 
 .menu-above {
@@ -270,7 +271,6 @@ body {
 
 .info-block_text {
   margin-right: 10vw;
-  margin-left: 10vw;
   font-size: 2vh;
 }
 
@@ -301,7 +301,16 @@ body {
   font-size: 2vh;
 }
 
+.small-h1 {
+  font-size: 2.5vh;
+  margin-left: 2vw;
+}
+
 @media only screen and (max-width: 1400px) {
+  .menu-above {
+    width: 100vw;
+  }
+
   .menu__action {
     font-size: 1.7vh;
   }
@@ -313,10 +322,6 @@ body {
 
   .content-img {
     width: 0vw;
-  }
-
-  .list-container__text p {
-    font-size: 2vh;
   }
 
   .list-container__header {
@@ -352,8 +357,7 @@ body {
   }
 
   .info-block_text {
-    margin-left: 5vw;
-    margin-right: auto;
+    margin-right: 0;
     font-size: 1.7vh;
   }
 
