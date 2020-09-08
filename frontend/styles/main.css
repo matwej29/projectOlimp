@@ -283,7 +283,7 @@ body {
   font-size: 2vh;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (min-width: 480px) {
   .content-img {
     display: none;
   }
@@ -331,7 +331,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 1920px) {
+@media only screen and (min-width: 750px) {
   .content-img {
     width: 20vw;
   }
