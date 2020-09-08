@@ -41,7 +41,7 @@ class News {
   }
 
   async add(header, text) {
-    let tmptext = "INSERT INTO news (header, text, date) VALUES ($1, $2, CURRENT_DATE)";
+    let tmptext = "INSERT INTO news (header, text, date) VALUES ($1, $2, CURRENT_DATE+CURRENT_TIME)";
     const client = await this.pool.connect();
     try {
       await client.query(tmptext, [header, text]);
@@ -52,7 +52,7 @@ class News {
   }
 
   async edit(id, item) {
-    let text = `UPDATE news SET header=$1, text=$2, date = CURRENT_DATE WHERE id=$3`;
+    let text = `UPDATE news SET header=$1, text=$2, date = CURRENT_DATE+CURRENT_TIME WHERE id=$3`;
     let values = [item.header, item.text, parseInt(id)];
     const client = await this.pool.connect();
     try {

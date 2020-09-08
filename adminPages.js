@@ -6,6 +6,9 @@ const storage = new Storage();
 const BDteam = require("./teams.js");
 const dbTeam = new BDteam();
 
+const DateForm = require("./dateForm");
+const dateForm = new DateForm();
+
 class Controller {
   async home(req, res) {
     let templist = await storage.news();
@@ -16,7 +19,7 @@ class Controller {
       element.text = null ? "" : element.text;
       element.text = marked(element.text);
       let s = element.date.toString();
-      element.date = (s[8]+s[9]+"."+s[5]+s[6]+"."+s[2]+s[3]).toString();
+      element.date = dateForm.formatDate(s);
     });
     res.render("homeA", { list: templist, layout: "layoutA", style_admin: "active-button"});
   }
