@@ -265,7 +265,7 @@ body {
   width: auto;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (max-width: 480px) {
   .header-img {
     width: 0vw;
   }
@@ -291,7 +291,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 1440px) {
+@media only screen and (max-width: 1440px) {
   .header-img {
     width: 20vw;
   }
