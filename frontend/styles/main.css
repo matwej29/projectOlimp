@@ -321,7 +321,7 @@ body {
   }
 
   .content-img {
-    width: 0vw;
+    display: none;
   }
 
   .list-container__header {

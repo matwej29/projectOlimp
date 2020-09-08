@@ -22,6 +22,7 @@
   "scripts": {
     "start-backend": "nodemon -e js,json,hbs index.js",
     "start-frontend": "parcel watch -d ./static/bundle --public-url /static/bundle ./frontend/index.js",
+    "build-frontend": "parcel build -d ./static/bundle --public-url /static/bundle ./frontend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
