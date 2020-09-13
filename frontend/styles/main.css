@@ -119,6 +119,12 @@ body {
   flex-direction: row;
 }
 
+.row-centering {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .action__icon-delete {
   background-image: url(../assets/svg/delete_button.svg);
 }
@@ -192,7 +198,7 @@ body {
 .header_content {
   display: flex;
   flex-direction: column;
-  /* flex-basis: 38vw; */
+  flex-basis: 38vw;
   margin-top: 1vh;
   margin-bottom: 2vh;
   padding-bottom: 1vh;
@@ -216,15 +222,19 @@ body {
 }
 
 .partner_ref {
-  align-items: center;
-  margin-top: 4vh;
-  margin-left: 6vw;
   margin-right: 5vw;
-  margin-bottom: 4vh;
-  width: 50vw;
 }
 
-.partner_ref h1 {
+.partner-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2vw;
+  min-width: 0;
+}
+
+.partner-list h1 {
   font-family: "Roboto", "Open Sans", sans-serif;
   color: #221f3b;
   font-size: 3.5vh;
@@ -317,7 +327,21 @@ body {
   margin-left: 2vw;
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1030px) {
+  .partner_ref-img {
+    height: 8vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+
+  .partner-list {
+    width: 76vw;
+  }
+
+  .wide-img {
+    height: 4vh;
+  }
+
   .menu-above {
     width: 100vw;
   }
@@ -351,7 +375,7 @@ body {
     box-sizing: border-box;
     margin-left: 10px;
     margin-bottom: 1vh;
-    font-size: 1vh;
+    font-size: 2vh;
     margin-left: 2vw;
   }
 
@@ -359,26 +383,8 @@ body {
     font-size: 1vh;
   }
 
-  .partner-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .partner_ref {
-    align-items: center;
-    margin-top: 1vh;
-    margin-left: 3vw;
-    margin-right: 0;
-    margin-bottom: 1vh;
-    width: 30vh;
-  }
-
   .partner_ref h1 {
     font-size: 2.1vh;
-  }
-
-  .partner_ref img {
-    height: 150px;
   }
 
   .info-block {
