@@ -29,9 +29,7 @@ const auth = basicAuth({
   realm: "Imb4T3st4pp",
 });
 
-app.get("/", function (req, res) {
-  res.redirect("/home");
-});
+app.get("/", Pages.home);
 
 app.get("/info", Pages.info);
 
