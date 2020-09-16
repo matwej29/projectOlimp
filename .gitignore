@@ -4,3 +4,4 @@ config.json
 static/bundle
 .vscode
 node_modules
+adminConfig.json

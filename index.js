@@ -23,8 +23,10 @@ const teamsController = new TeamsController();
 
 const basicAuth = require("express-basic-auth");
 
+const adminConfig = require("./adminConfig.json");
+
 const auth = basicAuth({
-  users: { admin: "admin" },
+  users: adminConfig,
   challenge: true,
   realm: "Imb4T3st4pp",
 });
