@@ -73,4 +73,8 @@ app.get("/admin/teams/edit", auth, teamsController.getEdit);
 
 app.post("/admin/teams/edit", auth, teamsController.postEdit);
 
+app.get("*", function (req, res) {
+  res.send("custom 404 page, TODO anyway");
+});
+
 app.listen(3000);
