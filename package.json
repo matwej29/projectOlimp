@@ -4,25 +4,33 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "Console": "^1.1.0",
     "admin-lte": "^3.0.5",
     "bootstrap": "^4.5.2",
     "express": "^4.17.1",
     "express-basic-auth": "^1.2.0",
     "git": "^0.1.5",
-    "handlebars": "^4.7.6",
-    "hbs": "^4.1.1",
+    "handlebars": "^4.7.7",
+    "hbs": "^4.1.2",
     "marked": "^1.1.1",
     "pg": "^8.3.2",
     "simplemde": "^1.11.2"
   },
   "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "^2.0.4",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.3.1"
   },
   "scripts": {
     "start-backend": "nodemon -e js,json,hbs index.js",
     "start-frontend": "parcel watch -d ./static/bundle --public-url /static/bundle ./frontend/index.js",
     "build-frontend": "parcel build -d ./static/bundle --public-url /static/bundle ./frontend/index.js",
+    "eslint": "eslint \"**/*.{js,ts}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,12 +1,12 @@
-<div class="content_main-block">
-    <div class="double-grid">
-        {{#each this.list}}
-        <div class="short-list_container">
-            <div class="list-container__header">
-                <h1>{{this.name}}</h1>
-            </div>
-            <div class="short-list_container_text">{{{ this.description }}}</div>
+<div class='content_main-block'>
+  <div class='double-grid'>
+    {{#each this.list}}
+      <div class='short-list_container'>
+        <div class='list-container__header'>
+          <h1>{{this.name}}</h1>
         </div>
-        {{/each}}
-    </div>
+        <div class='short-list_container_text'>{{{this.description}}}</div>
+      </div>
+    {{/each}}
+  </div>
 </div>

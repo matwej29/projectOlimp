@@ -1,80 +1,81 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
-const hbs = require("hbs");
+const hbs = require('hbs');
 
-app.set("view engine", "hbs");
+app.set('view engine', 'hbs');
 app.use(express.urlencoded({ extended: true }));
-app.set("views", __dirname + "/views");
-hbs.registerPartials(__dirname + "/views/partials");
+app.set('views', `${__dirname}/views`);
+hbs.registerPartials(`${__dirname}/views/partials`);
 
-app.use("/static", express.static(__dirname + "/static"));
+app.use('/static', express.static(`${__dirname}/static`));
 
-const pagesController = require("./pages.js");
-const Pages = new pagesController();
+const basicAuth = require('express-basic-auth');
 
-const adminController = require("./adminPages.js");
-const adminPages = new adminController();
+const PagesController = require('./pages.js');
+const pages = new PagesController();
 
-const NewsController = require("./newsController.js");
+const AdminController = require('./adminPages.js');
+const adminpages = new AdminController();
+
+const NewsController = require('./newsController.js');
 const newsController = new NewsController();
 
-const TeamsController = require("./teamsController.js");
+const TeamsController = require('./teamsController.js');
 const teamsController = new TeamsController();
 
-const basicAuth = require("express-basic-auth");
-
-const adminConfig = require("./adminConfig.json");
+const adminConfig = require('./adminConfig.json');
 
 const auth = basicAuth({
   users: adminConfig,
   challenge: true,
-  realm: "Imb4T3st4pp",
+  realm: 'Imb4T3st4pp',
 });
 
-app.get("/", Pages.home);
+app.get('/', pages.home);
 
-app.get("/info", Pages.info);
+app.get('/info', pages.info);
 
-app.get("/home", Pages.home);
+app.get('/home', pages.home);
 
-app.get("/organizers", Pages.organizers);
+app.get('/organizers', pages.organizers);
 
-app.get("/partners", Pages.partners);
+app.get('/partners', pages.partners);
 
-app.get("/help", Pages.help);
+app.get('/help', pages.help);
 
-app.get("/teams", Pages.teams);
+app.get('/teams', pages.teams);
 
-app.get("/admin", auth, adminPages.home);
+app.get('/admin', auth, adminpages.home);
 
-app.get("/admin/news/add", auth, newsController.getAdd);
+app.get('/admin/news/add', auth, newsController.getAdd);
 
-app.post("/admin/news/add", auth, newsController.postAdd);
+app.post('/admin/news/add', auth, newsController.postAdd);
 
-app.get("/admin/news/delete", auth, newsController.delete);
+app.get('/admin/news/delete', auth, newsController.delete);
 
-app.get("/admin/news/edit", auth, newsController.getEdit);
+app.get('/admin/news/edit', auth, newsController.getEdit);
 
-app.post("/admin/news/edit", auth, newsController.postEdit);
+app.post('/admin/news/edit', auth, newsController.postEdit);
 
-app.get("/admin/teams", adminPages.teams);
+app.get('/admin/teams', auth, adminpages.teams);
 
-app.get("/admin/teams/edit", auth, teamsController.getEdit);
+app.get('/admin/teams/edit', auth, teamsController.getEdit);
 
-app.post("/admin/teams/edit", auth, teamsController.postEdit);
+app.post('/admin/teams/edit', auth, teamsController.postEdit);
 
-app.get("/admin/teams/add", auth, teamsController.getAdd);
+app.get('/admin/teams/add', auth, teamsController.getAdd);
 
-app.post("/admin/teams/add", auth, teamsController.postAdd);
+app.post('/admin/teams/add', auth, teamsController.postAdd);
 
-app.get("/admin/teams/delete", auth, teamsController.delete);
+app.get('/admin/teams/delete', auth, teamsController.delete);
 
-app.get("/admin/teams/edit", auth, teamsController.getEdit);
+app.get('/admin/teams/edit', auth, teamsController.getEdit);
 
-app.post("/admin/teams/edit", auth, teamsController.postEdit);
+app.post('/admin/teams/edit', auth, teamsController.postEdit);
 
-app.get("*", function (req, res) {
-  res.send("custom 404 page, TODO anyway");
+app.get('*', (req, res) => {
+  res.send('custom 404 page, TODO anyway');
 });
 
-app.listen(3000);
+app.listen(3000, 'localhost');

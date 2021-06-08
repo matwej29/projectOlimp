@@ -1,18 +1,25 @@
-<div class="content_main-block centering">
-    <a href="/admin/news/add" class="add__action background-image_when-svg action__icon-add btn btn-primary"></a>
-    <div class="column-reverse">
-        {{#each this.list}}
-        <div class="each-list-container centering">
-            <div class="list-container__header">
-                <h1>{{this.header}}</h1>
-            </div>
-            <div class="list-container__text">{{{ this.text }}}</div>
-            <div class="list-container__date">{{this.date}}</div>
-            <a href="/admin/news/delete?id={{id}}"
-                class="list-container__action action__icon-delete background-image_when-svg btn btn-secondary"></a>
-            <a href="/admin/news/edit?id={{id}}"
-                class="list-container__action action__icon-edit background-image_when-svg btn btn-secondary"></a>
+<div class='content_main-block centering'>
+  <a
+    href='/admin/news/add'
+    class='add__action background-image_when-svg action__icon-add btn btn-primary'
+  ></a>
+  <div class='column-reverse'>
+    {{#each this.list}}
+      <div class='each-list-container centering'>
+        <div class='list-container__header'>
+          <h1>{{this.header}}</h1>
         </div>
-        {{/each}}
-    </div>
+        <div class='list-container__text'>{{{this.text}}}</div>
+        <div class='list-container__date'>{{this.date}}</div>
+        <a
+          href='/admin/news/delete?id={{id}}'
+          class='list-container__action action__icon-delete background-image_when-svg btn btn-secondary'
+        ></a>
+        <a
+          href='/admin/news/edit?id={{id}}'
+          class='list-container__action action__icon-edit background-image_when-svg btn btn-secondary'
+        ></a>
+      </div>
+    {{/each}}
+  </div>
 </div>

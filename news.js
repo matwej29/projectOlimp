@@ -1,5 +1,7 @@
-const pg = require("pg");
-const config = require("./config.json");
+const pg = require('pg');
+const Console = require('Console');
+const config = require('./config.json');
+
 class News {
   constructor() {
     this.pool = new pg.Pool({
@@ -15,9 +17,9 @@ class News {
     const client = await this.pool.connect();
     let result;
     try {
-      result = await client.query("SELECT * from news");
+      result = await client.query('SELECT * from news');
     } catch (err) {
-      console.log(err);
+      Console.error(err);
       return false;
     }
     client.release();
@@ -25,51 +27,52 @@ class News {
   }
 
   async itemById(id) {
-    let text = "SELECT * from news WHERE id = $1";
+    const text = 'SELECT * from news WHERE id = $1';
     let result;
     const client = await this.pool.connect();
     try {
       result = await client.query(text, [id]);
     } catch (err) {
-      console.log(err);
+      Console.error(err);
     }
     client.release();
     if (result.rowCount === 0) {
       return false;
     }
-    return await result.rows[0];
+    return result.rows[0];
   }
 
   async add(header, text) {
-    let tmptext = "INSERT INTO news (header, text, date) VALUES ($1, $2, CURRENT_DATE+CURRENT_TIME)";
+    const tmptext =
+      'INSERT INTO news (header, text, date) VALUES ($1, $2, CURRENT_DATE+CURRENT_TIME)';
     const client = await this.pool.connect();
     try {
       await client.query(tmptext, [header, text]);
     } catch (err) {
-      console.log(err);
+      Console.error(err);
     }
     client.release();
   }
 
   async edit(id, item) {
-    let text = `UPDATE news SET header=$1, text=$2, date = CURRENT_DATE+CURRENT_TIME WHERE id=$3`;
-    let values = [item.header, item.text, parseInt(id)];
+    const text = `UPDATE news SET header=$1, text=$2, date = CURRENT_DATE+CURRENT_TIME WHERE id=$3`;
+    const values = [item.header, item.text, +id];
     const client = await this.pool.connect();
     try {
       await client.query(text, values);
     } catch (err) {
-      console.log(err);
+      Console.error(err);
     }
     client.release();
   }
 
   async delete(id) {
-    let text = `DELETE FROM news WHERE id = $1`;
+    const text = `DELETE FROM news WHERE id = $1`;
     const client = await this.pool.connect();
     try {
       await client.query(text, [id]);
     } catch (err) {
-      console.log(err);
+      Console.error(err);
     }
     client.release();
   }
