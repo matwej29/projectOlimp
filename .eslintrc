@@ -17,8 +17,8 @@
     },
     "rules": {
         "import/newline-after-import": "off",
-        "no-param-reassign": "warn",
         "import/no-unresolved": "warn",
+        "no-param-reassign": ["error", { "props": false }],
         "class-methods-use-this": "off"
     }
 }

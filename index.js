@@ -2,77 +2,22 @@ const express = require('express');
 
 const app = express();
 const hbs = require('hbs');
+const helmet = require('helmet'); // protection
 
 app.set('view engine', 'hbs');
 app.use(express.urlencoded({ extended: true }));
 app.set('views', `${__dirname}/views`);
 hbs.registerPartials(`${__dirname}/views/partials`);
 
+app.use(helmet());
 app.use('/static', express.static(`${__dirname}/static`));
 
-const basicAuth = require('express-basic-auth');
+const adminRouter = require('./routes/adminRouter');
+const pageRouter = require('./routes/pageRouter');
 
-const PagesController = require('./pages.js');
-const pages = new PagesController();
+app.get('/*', pageRouter);
 
-const AdminController = require('./adminPages.js');
-const adminpages = new AdminController();
-
-const NewsController = require('./newsController.js');
-const newsController = new NewsController();
-
-const TeamsController = require('./teamsController.js');
-const teamsController = new TeamsController();
-
-const adminConfig = require('./adminConfig.json');
-
-const auth = basicAuth({
-  users: adminConfig,
-  challenge: true,
-  realm: 'Imb4T3st4pp',
-});
-
-app.get('/', pages.home);
-
-app.get('/info', pages.info);
-
-app.get('/home', pages.home);
-
-app.get('/organizers', pages.organizers);
-
-app.get('/partners', pages.partners);
-
-app.get('/help', pages.help);
-
-app.get('/teams', pages.teams);
-
-app.get('/admin', auth, adminpages.home);
-
-app.get('/admin/news/add', auth, newsController.getAdd);
-
-app.post('/admin/news/add', auth, newsController.postAdd);
-
-app.get('/admin/news/delete', auth, newsController.delete);
-
-app.get('/admin/news/edit', auth, newsController.getEdit);
-
-app.post('/admin/news/edit', auth, newsController.postEdit);
-
-app.get('/admin/teams', auth, adminpages.teams);
-
-app.get('/admin/teams/edit', auth, teamsController.getEdit);
-
-app.post('/admin/teams/edit', auth, teamsController.postEdit);
-
-app.get('/admin/teams/add', auth, teamsController.getAdd);
-
-app.post('/admin/teams/add', auth, teamsController.postAdd);
-
-app.get('/admin/teams/delete', auth, teamsController.delete);
-
-app.get('/admin/teams/edit', auth, teamsController.getEdit);
-
-app.post('/admin/teams/edit', auth, teamsController.postEdit);
+app.get('/admin', adminRouter);
 
 app.get('*', (req, res) => {
   res.send('custom 404 page, TODO anyway');
