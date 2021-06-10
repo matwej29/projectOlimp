@@ -15,7 +15,7 @@ app.use('/static', express.static(`${__dirname}/static`));
 const adminRouter = require('./routes/adminRouter');
 const pageRouter = require('./routes/pageRouter');
 
-app.get('/*', pageRouter);
+app.get('/*', pageRouter); // pages for unauthorized users
 
 app.get('/admin', adminRouter);
 

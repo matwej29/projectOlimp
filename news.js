@@ -27,11 +27,11 @@ class News {
   }
 
   async itemById(id) {
-    const text = 'SELECT * from news WHERE id = $1';
+    const queryText = 'SELECT * from news WHERE id = $1';
     let result;
     const client = await this.pool.connect();
     try {
-      result = await client.query(text, [id]);
+      result = await client.query(queryText, [id]);
     } catch (err) {
       Console.error(err);
     }
@@ -43,11 +43,11 @@ class News {
   }
 
   async add(header, text) {
-    const tmptext =
+    const queryText =
       'INSERT INTO news (header, text, date) VALUES ($1, $2, CURRENT_DATE+CURRENT_TIME)';
     const client = await this.pool.connect();
     try {
-      await client.query(tmptext, [header, text]);
+      await client.query(queryText, [header, text]);
     } catch (err) {
       Console.error(err);
     }
@@ -55,11 +55,11 @@ class News {
   }
 
   async edit(id, item) {
-    const text = `UPDATE news SET header=$1, text=$2, date = CURRENT_DATE+CURRENT_TIME WHERE id=$3`;
+    const queryText = `UPDATE news SET header=$1, text=$2, date = CURRENT_DATE+CURRENT_TIME WHERE id=$3`;
     const values = [item.header, item.text, +id];
     const client = await this.pool.connect();
     try {
-      await client.query(text, values);
+      await client.query(queryText, values);
     } catch (err) {
       Console.error(err);
     }
@@ -67,10 +67,10 @@ class News {
   }
 
   async delete(id) {
-    const text = `DELETE FROM news WHERE id = $1`;
+    const queryText = `DELETE FROM news WHERE id = $1`;
     const client = await this.pool.connect();
     try {
-      await client.query(text, [id]);
+      await client.query(queryText, [id]);
     } catch (err) {
       Console.error(err);
     }
