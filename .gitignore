@@ -1,6 +1,6 @@
 .idea
 .cache
-config.json
+dbConfig.json
 static/bundle
 .vscode
 node_modules

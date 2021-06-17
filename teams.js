@@ -1,7 +1,7 @@
 const Console = require("Console");
 
 const pg = require("pg");
-const config = require("./config.json");
+const config = require("./dbConfig.json");
 class News {
   constructor() {
     this.pool = new pg.Pool({

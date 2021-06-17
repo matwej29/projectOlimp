@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const PagesController = require('../pages.js');
+const PagesController = require('../pagesController.js');
 const pages = new PagesController();
 
 router.get('/', pages.home);
+
+// router.get('/news', pages.news);
 
 router.get('/info', pages.info);
 

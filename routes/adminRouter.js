@@ -46,4 +46,10 @@ router.get('/admin/teams/edit', auth, teamsController.getEdit);
 
 router.post('/admin/teams/edit', auth, teamsController.postEdit);
 
+router.get('/admin/info', auth, adminPages.info);
+
+router.get('/admin/info/edit', auth, adminPages.getInfo);
+
+router.post('/admin/info/edit', auth, adminPages.postInfo);
+
 module.exports = router;

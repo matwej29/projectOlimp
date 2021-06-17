@@ -6,21 +6,30 @@ const dbTeam = new BDteam();
 const Storage = require('./news.js');
 const storage = new Storage();
 
+const pages = require('./pageModel.js');
+
 const formatDate = require('./modules/formatDate.js');
 
 class Controller {
-  info(req, res) {
-    res.render('info', { style_info: 'active-button', page_name: 'Положение' });
+  async info(req, res) {
+    const info = await pages.Pages.findOne({ where: { title: 'info' } });
+    info.body = marked(info.body)
+    res.render('info', {
+      style_info: 'active-button',
+      page_name: 'Положение',
+      regulation: info.body,
+    });
   }
 
   async home(req, res) {
     const templist = await storage.news();
-    templist.sort((a, b) => a.id - b.id);
-    templist.forEach(async element => {
-      element.text = marked(element.text);
-      const s = element.date.toString();
-      element.date = formatDate(s);
-    });
+    templist
+      .sort((a, b) => a.id - b.id)
+      .forEach(async element => {
+        element.text = marked(element.text);
+        const s = element.date.toString();
+        element.date = formatDate(s);
+      });
     res.render('home', {
       list: templist,
       style_home: 'active-button',
@@ -55,11 +64,12 @@ class Controller {
 
   async teams(req, res) {
     const templist = await dbTeam.teams();
-    templist.sort((a, b) => a.id - b.id);
-    templist.forEach(async element => {
-      element.description = undefined ? '' : element.description;
-      element.description = marked(element.description);
-    });
+    templist
+      .sort((a, b) => a.id - b.id)
+      .forEach(async element => {
+        element.description = undefined ? '' : element.description;
+        element.description = marked(element.description);
+      });
     res.render('teams', {
       list: templist,
       style_teams: 'active-button',

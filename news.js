@@ -1,6 +1,6 @@
 const pg = require('pg');
 const Console = require('Console');
-const config = require('./config.json');
+const config = require('./dbConfig.json');
 
 class News {
   constructor() {
