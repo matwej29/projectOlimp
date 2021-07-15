@@ -2,6 +2,12 @@
     <div class="content_main-block each-list-container centering">
         <input type="text" value="{{firstValue}}" name="{{ inputName }}" class="form-control input-container__input" />
         <div><textarea cols="30" name="{{ areaName }}" id="editArea">{{ secondValue }}</textarea></div>
+        <p>Видимость для пользователей
+        <select name="access">
+            {{#each this.options}}
+            <option value="{{this.value}}" {{#if this.selected}} selected {{/if}}>{{this.text}}</option>
+            {{/each}}
+        </select></p>
         <button type="submit" class="add__action background-image_when-svg action__icon-add"></button>
     </div>
 </form>

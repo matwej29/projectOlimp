@@ -1,6 +1,4 @@
-const Storage = require('./news.js');
-
-const storage = new Storage();
+const storage = require('./news.js');
 
 class Controller {
   getAdd(req, res) {
@@ -14,17 +12,22 @@ class Controller {
   }
 
   postAdd(req, res) {
-    storage.add(req.body.header, req.body.text);
+    const article = req.body;
+    storage.News.upsert({
+      header: article.header,
+      text: article.header,
+      access: article.access,
+    });
     res.redirect('/admin');
   }
 
   delete(req, res) {
-    storage.delete(req.query.id);
+    storage.News.destroy({ where: { id: req.query.id } });
     res.redirect('/admin');
   }
 
   async getEdit(req, res) {
-    const item = await storage.itemById(req.query.id);
+    const item = await storage.News.findOne({ where: { id: req.query.id } });
     res.render('edit', {
       action: `/admin/news/edit?id=${req.query.id}`,
       firstValue: item.header,
@@ -33,11 +36,15 @@ class Controller {
       areaName: 'text',
       layout: 'layoutA',
       style_admin: 'active-button',
+      options: [{value: '1', text: "Все пользователи", selected: item.access === 1 },
+      {value: '2', text: "Только авторизованные пользователи", selected: item.access === 2},
+    ]
     });
   }
 
   postEdit(req, res) {
-    storage.edit(req.query.id, req.body);
+    const article = req.body;
+    storage.News.update(article, { where: { id: req.query.id } });
     res.redirect('/admin');
   }
 }

@@ -3,8 +3,7 @@ const marked = require('marked');
 const BDteam = require('./teams.js');
 const dbTeam = new BDteam();
 
-const Storage = require('./news.js');
-const storage = new Storage();
+const storage = require('./news.js');
 
 const pages = require('./pageModel.js');
 
@@ -22,13 +21,12 @@ class Controller {
   }
 
   async home(req, res) {
-    const templist = await storage.news();
+    const templist = await storage.News.findAll({where: {access: 1}});
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
         element.text = marked(element.text);
-        const s = element.date.toString();
-        element.date = formatDate(s);
+        element.date = formatDate(element.date);
       });
     res.render('home', {
       list: templist,
