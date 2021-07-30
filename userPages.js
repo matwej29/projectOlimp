@@ -12,17 +12,15 @@ const formatDate = require('./modules/formatDate.js');
 
 class Controller {
   async home(req, res) {
-    let templist = await storage.News.findAll({
+    const templist = await storage.News.findAll({
       where: { access: { [Op.or]: [{ [Op.lte]: req.user.access }, 1] } },
     });
-    templist = templist
+    templist
       .sort((a, b) => a.id - b.id)
       .forEach(element => {
         element.text = marked(element.text);
-        Console.error(element.text);
         element.date = formatDate(element.date);
       });
-    Console.warn(templist);
     res.render('home', {
       list: templist,
       style_home: 'active-button',
