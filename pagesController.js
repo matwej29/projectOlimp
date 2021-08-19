@@ -6,8 +6,10 @@ const formatDate = require('./modules/formatDate');
 
 class Controller {
   async info(req, res) {
-    const info = await storage.Pages.findOne({ where: { title: 'info' } });
-    info.body = marked(info.body)
+    const info = (await storage.Pages.findOne({
+      where: { title: 'info' },
+    })) ?? { body: '' };
+    info.body = marked(info.body);
     res.render('info', {
       style_info: 'active-button',
       page_name: 'Положение',
@@ -16,7 +18,7 @@ class Controller {
   }
 
   async home(req, res) {
-    const templist = await storage.News.findAll({where: {access: 1}});
+    const templist = await storage.News.findAll({ where: { access: 1 } });
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {

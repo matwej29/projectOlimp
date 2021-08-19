@@ -2,12 +2,12 @@ const marked = require('marked');
 
 const storage = require('./modelsHandler');
 
-const formatDate = require('./modules/formatDate.js');
+const formatDate = require('./modules/formatDate');
 
 class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll();
-    
+
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
@@ -37,7 +37,9 @@ class Controller {
   }
 
   async info(req, res) {
-    const info = await storage.Pages.findOne({ where: { title: 'info' } });
+    const info = (await storage.Pages.findOne({
+      where: { title: 'info' },
+    })) ?? { body: '' };
     info.body = marked(info.body);
 
     res.render('infoA', {
@@ -61,7 +63,7 @@ class Controller {
   }
 
   async postInfo(req, res) {
-    await pages.Pages.update(
+    await storage.Pages.update(
       { body: req.body.text },
       { where: { title: 'info' } },
     );
