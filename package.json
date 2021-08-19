@@ -48,7 +48,7 @@
   },
   "targets": {
     "app": {
-      "distDir": "./static/test"
+      "distDir": "./static/bundle"
     },
     "main": false
   },
