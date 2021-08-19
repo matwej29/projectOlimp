@@ -1,0 +1,4 @@
+# projectOlimp
+
+# Installation
+```npm i```
