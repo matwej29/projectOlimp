@@ -2,18 +2,16 @@ const marked = require('marked');
 
 const { Op } = require('sequelize');
 const Console = require('Console');
-const storage = require('./news.js');
-const users = require('./users.js');
-const { Users } = users;
+const storage = require('./modelsHandler');
 
 // const pages = require('./pageModel.js');
 
-const formatDate = require('./modules/formatDate.js');
+const formatDate = require('./modules/formatDate');
 
 class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll({
-      where: { access: { [Op.or]: [{ [Op.lte]: req.user.access }, 1] } },
+      where: { access: { [Op.or]: [{ [Op.lte]: req.user?.access }, 1] } },
     });
     templist
       .sort((a, b) => a.id - b.id)
@@ -50,10 +48,10 @@ class Controller {
   }
 
   async postRegister(req, res) {
-    if (await Users.findOne({ where: { email: req.body.email } })) {
+    if (await storage.Users.findOne({ where: { email: req.body.email } })) {
       res.redirect('/');
     } else {
-      await Users.create({
+      await storage.Users.create({
         password: req.body.password,
         email: req.body.email,
         access: 0,

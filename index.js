@@ -13,6 +13,9 @@ hbs.registerPartials(`${__dirname}/views/partials`);
 
 app.use('/static', express.static(`${__dirname}/static`));
 
+const { NODE_ENV, PORT = 3000 } = process.env;
+const isProduction = NODE_ENV === 'production';
+
 const MILLS_IN_DAY = 86400000;
 app.use(
   require('express-session')({
@@ -22,6 +25,14 @@ app.use(
     cookie: { maxAge: MILLS_IN_DAY },
   }),
 );
+
+
+// app.use((err, req, res) =>
+//   res.status(500).json({
+//     message: 'Internal server error',
+//     error: isProduction ? null : err,
+//   }),
+// );
 
 const userRouter = require('./routes/userRouter'); // for authorized users
 const adminRouter = require('./routes/adminRouter');
@@ -35,6 +46,4 @@ app.get('*', (req, res) => {
   res.send('page not found');
 });
 
-app.listen(3000, 'localhost', () => {
-  // Console.log('server started');
-});
+app.listen(PORT, 'localhost');

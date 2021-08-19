@@ -7,8 +7,7 @@ const { Strategy } = require('passport-local');
 const { ensureLoggedIn } = require('connect-ensure-login');
 const flash = require('connect-flash');
 
-const Console = require('Console');
-const users = require('../users.js');
+const users = require('../users');
 const { Users } = users;
 
 const UserPages = require('../userPages');
@@ -60,7 +59,7 @@ module.exports = app => {
     failWithError: true,
   });
 
-  router.get('/', ensureLoggedIn(), userPages.home);
+  router.get('/', userPages.home);
 
   router.get('/login', userPages.getLogin);
 

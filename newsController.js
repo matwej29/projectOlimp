@@ -1,4 +1,4 @@
-const storage = require('./news.js');
+const { News } = require('./modelsHandler.js');
 
 class Controller {
   getAdd(req, res) {
@@ -13,7 +13,7 @@ class Controller {
 
   postAdd(req, res) {
     const article = req.body;
-    storage.News.upsert({
+    News.upsert({
       header: article.header,
       text: article.header,
       access: article.access,
@@ -22,12 +22,12 @@ class Controller {
   }
 
   delete(req, res) {
-    storage.News.destroy({ where: { id: req.query.id } });
+    News.destroy({ where: { id: req.query.id } });
     res.redirect('/admin');
   }
 
   async getEdit(req, res) {
-    const item = await storage.News.findOne({ where: { id: req.query.id } });
+    const item = await News.findOne({ where: { id: req.query.id } });
     res.render('edit', {
       action: `/admin/news/edit?id=${req.query.id}`,
       firstValue: item.header,
@@ -36,15 +36,20 @@ class Controller {
       areaName: 'text',
       layout: 'layoutA',
       style_admin: 'active-button',
-      options: [{value: '1', text: "Все пользователи", selected: item.access === 1 },
-      {value: '2', text: "Только авторизованные пользователи", selected: item.access === 2},
-    ]
+      options: [
+        { value: '1', text: 'Все пользователи', selected: item.access === 1 },
+        {
+          value: '2',
+          text: 'Только авторизованные пользователи',
+          selected: item.access === 2,
+        },
+      ],
     });
   }
 
   postEdit(req, res) {
     const article = req.body;
-    storage.News.update(article, { where: { id: req.query.id } });
+    News.update(article, { where: { id: req.query.id } });
     res.redirect('/admin');
   }
 }

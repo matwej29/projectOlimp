@@ -5,3 +5,4 @@ static/bundle
 .vscode
 node_modules
 adminConfig.json
+.parcel-cache

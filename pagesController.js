@@ -1,17 +1,12 @@
 const marked = require('marked');
 
-const BDteam = require('./teams.js');
-const dbTeam = new BDteam();
+const storage = require('./modelsHandler');
 
-const storage = require('./news.js');
-
-const pages = require('./pageModel.js');
-
-const formatDate = require('./modules/formatDate.js');
+const formatDate = require('./modules/formatDate');
 
 class Controller {
   async info(req, res) {
-    const info = await pages.Pages.findOne({ where: { title: 'info' } });
+    const info = await storage.Pages.findOne({ where: { title: 'info' } });
     info.body = marked(info.body)
     res.render('info', {
       style_info: 'active-button',
@@ -61,7 +56,7 @@ class Controller {
   }
 
   async teams(req, res) {
-    const templist = await dbTeam.teams();
+    const templist = await storage.Teams.findAll();
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {

@@ -17,20 +17,20 @@
   }
   
   .button_icon_edit {
-    background-image: url("/static/pencil.dea61180.svg");
+    background-image: url("../assets/svg/edit_pencil.svg");
   }
   
   .button_icon_confirm {
-    background-image: url("/static/confirm.e329965a.svg");
+    background-image: url("../assets/svg/edit_confirm.svg");
   }
   
   .button_icon_plus {
-    background-image: url("/static/plus.d173a67e.svg");
+    background-image: url("../assets/svg/plus.svg");
     background-size: 30%;
   }
   
   .button_icon_delete {
-    background-image: url("/static/trashCanNew.e01245dc.svg");
+    background-image: url("../assets/svg/delete_button.svg");
   }
   
   .button_style_icon {
