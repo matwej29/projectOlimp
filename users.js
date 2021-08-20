@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         allowNull: false,
       },
       password: {
-        type: DataTypes.CHAR(100),
+        type: DataTypes.CHAR(60),
         allowNull: false,
       },
       access: {

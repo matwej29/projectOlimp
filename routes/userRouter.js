@@ -7,8 +7,7 @@ const { Strategy } = require('passport-local');
 const { ensureLoggedIn } = require('connect-ensure-login');
 const flash = require('connect-flash');
 
-const users = require('../users');
-const { Users } = users;
+const { Users } = require('../modelsHandler');
 
 const UserPages = require('../userPages');
 const userPages = new UserPages();

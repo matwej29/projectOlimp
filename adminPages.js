@@ -7,7 +7,6 @@ const formatDate = require('./modules/formatDate');
 class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll();
-
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {

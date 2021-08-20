@@ -1,14 +1,18 @@
+// const { Sequelize, DataTypes, Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes, Model) => {
   class News extends Model {}
 
   News.init(
     {
-      id: {
-        type: DataTypes.UUIDV4,
-        primaryKey: true,
-      },
+      // id: {
+      //   allowNull: false,
+      //   type: DataTypes.INTEGER,
+      //   primaryKey: true,
+      //   autoIncrement: true,
+      // },
       header: {
-        type: DataTypes.TEXT('tiny'),
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       text: {
@@ -16,6 +20,7 @@ module.exports = (sequelize, DataTypes, Model) => {
       },
       date: {
         type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW(),
       },
       access: {
         type: DataTypes.INTEGER,
@@ -29,5 +34,5 @@ module.exports = (sequelize, DataTypes, Model) => {
       tableName: 'news',
     },
   );
-  return News
+  return News;
 };

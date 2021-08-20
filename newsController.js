@@ -1,4 +1,4 @@
-const { News } = require('./modelsHandler.js');
+const { News } = require('./modelsHandler');
 
 class Controller {
   getAdd(req, res) {
@@ -15,8 +15,8 @@ class Controller {
     const article = req.body;
     News.upsert({
       header: article.header,
-      text: article.header,
-      access: article.access,
+      text: article.text,
+      access: article.access ?? 0,
     });
     res.redirect('/admin');
   }

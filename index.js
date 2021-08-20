@@ -5,7 +5,17 @@ const app = express();
 const hbs = require('hbs');
 const helmet = require('helmet'); // protection
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'script-src': ["'self'", 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'],
+        'connect-src': ["'self'", 'ws://localhost:1234'],
+      },
+    },
+  }),
+);
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.set('view engine', 'hbs');
 app.set('views', `${__dirname}/views`);
@@ -26,13 +36,12 @@ app.use(
   }),
 );
 
-
-// app.use((err, req, res) =>
-//   res.status(500).json({
-//     message: 'Internal server error',
-//     error: isProduction ? null : err,
-//   }),
-// );
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    message: 'Internal server error',
+    error: isProduction ? null : err,
+  });
+});
 
 const userRouter = require('./routes/userRouter'); // for authorized users
 const adminRouter = require('./routes/adminRouter');

@@ -9,13 +9,13 @@ const auth = basicAuth({
   realm: 'Imb4T3st4pp',
 });
 
-const AdminPages = require('../adminPages.js');
+const AdminPages = require('../adminPages');
 const adminPages = new AdminPages();
 
-const NewsController = require('../newsController.js');
+const NewsController = require('../newsController');
 const newsController = new NewsController();
 
-const TeamsController = require('../teamsController.js');
+const TeamsController = require('../teamsController');
 const teamsController = new TeamsController();
 
 router.get('/admin', auth, adminPages.home);

@@ -3,10 +3,11 @@ module.exports = (sequelize, DataTypes, Model) => {
 
   Teams.init(
     {
-      id: {
-        type: DataTypes.UUIDV4,
-        primaryKey: true,
-      },
+      // id: {
+      //   type: DataTypes.INTEGER,
+      //   primaryKey: true,
+      //   autoIncrement: true,
+      // },
       name: {
         type: DataTypes.TEXT('tiny'),
         allowNull: false,
