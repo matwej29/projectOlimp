@@ -4,12 +4,10 @@ const { Op } = require('sequelize');
 const Console = require('Console');
 const storage = require('./modelsHandler');
 
-// const pages = require('./pageModel.js');
-
 class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll({
-      where: { access: { [Op.or]: [{ [Op.lte]: req.user?.access }, 1] } },
+      where: { access: { [Op.lte]: req.user?.access ?? 0 } },
     });
     templist
       .sort((a, b) => a.id - b.id)
@@ -51,7 +49,7 @@ class Controller {
       await storage.Users.create({
         password: req.body.password,
         email: req.body.email,
-        access: 0,
+        access: 1,
       }).catch(err => {
         res.send(err);
       });

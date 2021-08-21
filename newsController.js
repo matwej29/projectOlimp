@@ -13,9 +13,9 @@ class Controller {
       style_admin: 'active-button',
       accessChoiсe: true,
       accessOptions: [
-        { value: '1', text: 'Все пользователи', selected: true },
+        { value: '0', text: 'Все пользователи', selected: true },
         {
-          value: '2',
+          value: '1',
           text: 'Только авторизованные пользователи',
         },
       ],

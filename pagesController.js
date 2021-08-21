@@ -15,7 +15,9 @@ class Controller {
   }
 
   async home(req, res) {
-    const templist = await storage.News.findAll({ where: { access: 1 } });
+    const templist = (await storage.News.findAll({ where: { access: 1 } })) ?? {
+      text: '',
+    };
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
@@ -54,7 +56,7 @@ class Controller {
   }
 
   async teams(req, res) {
-    const templist = await storage.Teams.findAll();
+    const templist = await storage.Teams.findAll() ?? {};
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {

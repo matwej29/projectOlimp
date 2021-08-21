@@ -6,7 +6,7 @@ class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll();
     templist
-      .sort((a, b) => a.id - b.id)
+      .sort((a, b) => b.id - a.id)
       .forEach(async element => {
         element.text = marked(element?.text ?? '');
       });
@@ -22,7 +22,7 @@ class Controller {
   async teams(req, res) {
     const templist = await storage.Teams.findAll();
     templist
-      .sort((a, b) => a.id - b.id)
+      .sort((a, b) => b.id - a.id)
       .forEach(async element => {
         element.header = element.name;
         element.text = marked(element?.description ?? '');
