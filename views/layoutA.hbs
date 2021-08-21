@@ -1,30 +1,36 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Проектный Олимп</title>
-    <link href="/static/bundle/index.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>
+    Проектный Олимп
+  </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css" />
 </head>
 
-<body class="centering">
-    <div>{{>menuA}}</div>
-    <div class="inpage_content column">
-        <div class="inpage-header each-list-container">
-            <div class="header_content">
-                <div class="header_title">
-                    <img class="spaced" src="/static/img/logo.svg" width="100px">
-                    <h1 class="header_title-text">Проектный Олимп</h1>
-                </div>
-            </div>
-        </div>
-        <div class="page_name">
-            <h1>{{page_name}}</h1>
-        </div>
-        {{{body}}}
+<body class="skin-blue sidebar-mini sidebar-collapse">
+  <div class="wrapper">
+    {{>menuA}}
+    <div class="content-wrapper">
+      <div class="content-header">
+        <h1>
+          {{page_name}}
+        </h1>
+      </div>
+      <div class='content'>{{{body}}}</div>
     </div>
-    <script src="/static/bundle/index.js"></script>
+  </div>
+  <script src="/static/bundle/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

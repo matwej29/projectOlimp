@@ -1,8 +1,6 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const config = require('./dbConfig.json');
 
-console.log('requiring modelsHandler');
-
 const sequelize = new Sequelize({
   dialect: 'postgres',
   host: config.host,
@@ -20,15 +18,14 @@ const News = require('./news')(sequelize, DataTypes, Model);
 const Pages = require('./pages')(sequelize, DataTypes, Model);
 const Teams = require('./teams')(sequelize, DataTypes, Model);
 
-sequelize.modelManager.addModel(Users)
-
-sequelize.models = {
-  Users,
-  News,
-  Pages,
-  Teams
-};
+sequelize.modelManager.addModel(Users);
+sequelize.modelManager.addModel(News);
+sequelize.modelManager.addModel(Pages);
+sequelize.modelManager.addModel(Teams);
 
 sequelize.sync({ alter: true });
 
+/**
+ * @type {import('sequelize/types').ModelCtor}
+ */
 module.exports = sequelize.models;

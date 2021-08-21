@@ -3,6 +3,12 @@ module.exports = (sequelize, DataTypes, Model) => {
 
   Pages.init(
     {
+      id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       title: {
         type: DataTypes.TEXT('tiny'),
       },

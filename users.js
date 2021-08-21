@@ -1,6 +1,13 @@
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
+/**
+ * 
+ * @param {import('sequelize').Sequelize} sequelize 
+ * @param {import('sequelize').DataTypes} DataTypes 
+ * @param {import('sequelize').Model} Model 
+ * @returns 
+ */
 module.exports = (sequelize, DataTypes, Model) => {
   class Users extends Model {}
 

@@ -1,13 +1,21 @@
-<form action="{{action}}" method="post">
-    <div class="content_main-block each-list-container centering">
-        <input type="text" value="{{firstValue}}" name="{{ inputName }}" class="form-control input-container__input" />
-        <div><textarea cols="30" name="{{ areaName }}" id="editArea">{{ secondValue }}</textarea></div>
+<form action="{{action}}" method="post" class="card input-group">
+    <div class='card-header'>
+        <input type="text" value="{{firstValue}}" name="{{ inputName }}" class="form-control input-container__input input-group-text" />
+    </div>
+    <div class="content_main-block each-list-container centering card-body">
+        <div><textarea cols="30" name="{{ areaName }}" id="editArea" class="form-control">{{ secondValue }}</textarea></div>
+        {{#if accessChoiсe}}
         <p>Видимость для пользователей
-        <select name="access">
-            {{#each this.options}}
-            <option value="{{this.value}}" {{#if this.selected}} selected {{/if}}>{{this.text}}</option>
-            {{/each}}
-        </select></p>
-        <button type="submit" class="add__action background-image_when-svg action__icon-add"></button>
+            <select name="access" class='form-select'>
+                {{#each this.accessOptions}}
+                <option value="{{this.value}}" {{#if this.selected}} selected {{/if}}>{{this.text}}</option>
+                {{/each}}
+            </select>
+        </p>
+        {{/if}}
+    </div>
+    <div class='card-footer'>
+        <button type="submit"
+            class="add__action background-image_when-svg action__icon-add btn btn-secondary">Сохранить</button>
     </div>
 </form>

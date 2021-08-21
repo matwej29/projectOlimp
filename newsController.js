@@ -1,3 +1,6 @@
+/**
+ * @type {import('sequelize').Model}
+ */
 const { News } = require('./modelsHandler');
 
 class Controller {
@@ -8,12 +11,20 @@ class Controller {
       action: '/admin/news/add',
       layout: 'layoutA',
       style_admin: 'active-button',
+      accessChoiсe: true,
+      accessOptions: [
+        { value: '1', text: 'Все пользователи', selected: true },
+        {
+          value: '2',
+          text: 'Только авторизованные пользователи',
+        },
+      ],
     });
   }
 
-  postAdd(req, res) {
+  async postAdd(req, res) {
     const article = req.body;
-    News.upsert({
+    await News.upsert({
       header: article.header,
       text: article.text,
       access: article.access ?? 0,
@@ -44,6 +55,7 @@ class Controller {
           selected: item.access === 2,
         },
       ],
+      accessChoiсe: true,
     });
   }
 

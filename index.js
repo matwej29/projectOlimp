@@ -16,6 +16,7 @@ app.use(
     },
   }),
 );
+
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.set('view engine', 'hbs');
 app.set('views', `${__dirname}/views`);
@@ -55,4 +56,4 @@ app.get('*', (req, res) => {
   res.send('page not found');
 });
 
-app.listen(PORT, 'localhost');
+app.listen(PORT);

@@ -2,7 +2,7 @@ const marked = require('marked');
 
 const storage = require('./modelsHandler');
 
-const formatDate = require('./modules/formatDate');
+// const formatDate = require('./modules/formatDate');
 
 class Controller {
   async home(req, res) {
@@ -10,13 +10,15 @@ class Controller {
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
-        element.text = undefined ? '' : marked(element.text);
-        element.date = formatDate(element.date);
+        element.text = marked(element?.text ?? '');
+        // element.date = formatDate(element.date);
       });
-    res.render('homeA', {
+    res.render('cardList', {
       list: templist,
       layout: 'layoutA',
       style_admin: 'active-button',
+      page_name: 'Новости',
+      path: 'news',
     });
   }
 
@@ -25,13 +27,15 @@ class Controller {
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
-        element.description = undefined ? '' : element.description;
-        element.description = marked(element.description);
+        element.header = element.name;
+        element.text = marked(element?.description ?? '');
       });
-    res.render('teamsA', {
+    res.render('cardList', {
       list: templist,
       layout: 'layoutA',
       style_teams: 'active-button',
+      page_name: 'Команды',
+      path: 'teams',
     });
   }
 
@@ -45,11 +49,13 @@ class Controller {
       regulation: info.body,
       style_info: 'active-button',
       layout: 'layoutA',
+      page_name: 'Положение',
     });
   }
 
   async getInfo(req, res) {
-    const item = await storage.Pages.findOne({ where: { title: 'info' } });
+    const item =
+      (await storage.Pages.findOne({ where: { title: 'info' } })) ?? '';
     res.render('edit', {
       action: `/admin/info/edit`,
       firstValue: 'Положение',
@@ -62,8 +68,8 @@ class Controller {
   }
 
   async postInfo(req, res) {
-    await storage.Pages.update(
-      { body: req.body.text },
+    await storage.Pages.upsert(
+      { title: 'info', body: req.body.text },
       { where: { title: 'info' } },
     );
     res.redirect('/admin/info');

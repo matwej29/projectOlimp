@@ -12,11 +12,10 @@ class Controller {
   }
 
   async postAdd(req, res) {
-    Teams.upsert({
+    await Teams.upsert({
       name: req.body.name,
       description: req.body.description,
     });
-    await Teams.insert(req.body.name, req.body.description);
     res.redirect('/admin/teams');
   }
 
