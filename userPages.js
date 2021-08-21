@@ -65,6 +65,22 @@ class Controller {
   getRegister(req, res) {
     res.render('register');
   }
+
+  getRequest(req, res) {
+    res.render('request', { user: req.user });
+  }
+
+  async postRequest(req, res) {
+    const request = JSON.stringify({
+      team_name: req.body.team_name,
+      team_desc: req.body.team_description,
+      school: req.body.school,
+      boss: req.body.boss,
+      status: 'unread',
+    });
+    console.log(request);
+    res.redirect('/');
+  }
 }
 
 module.exports = Controller;

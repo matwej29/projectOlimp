@@ -72,5 +72,9 @@ module.exports = app => {
 
   router.post('/registration', userPages.postRegister);
 
+  router.get('/request', ensureLoggedIn('/login'), userPages.getRequest);
+
+  router.post('/request', ensureLoggedIn('/login'), userPages.postRequest);
+
   return router;
 };
