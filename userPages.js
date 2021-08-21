@@ -6,8 +6,6 @@ const storage = require('./modelsHandler');
 
 // const pages = require('./pageModel.js');
 
-const formatDate = require('./modules/formatDate');
-
 class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll({
@@ -17,7 +15,6 @@ class Controller {
       .sort((a, b) => a.id - b.id)
       .forEach(element => {
         element.text = marked(element.text);
-        element.date = formatDate(element.date);
       });
     res.render('home', {
       list: templist,
@@ -78,7 +75,7 @@ class Controller {
       boss: req.body.boss,
       status: 'unread',
     });
-    console.log(request);
+    Console.log(request);
     res.redirect('/');
   }
 }

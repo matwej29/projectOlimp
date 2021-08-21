@@ -1,8 +1,5 @@
 const marked = require('marked');
-
 const storage = require('./modelsHandler');
-
-// const formatDate = require('./modules/formatDate');
 
 class Controller {
   async info(req, res) {
@@ -23,7 +20,6 @@ class Controller {
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
         element.text = marked(element.text);
-        // element.date = formatDate(element.date);
       });
     res.render('home', {
       list: templist,
@@ -62,8 +58,7 @@ class Controller {
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
-        element.description = undefined ? '' : element.description;
-        element.description = marked(element.description);
+        element.description = marked(element.description ?? '');
       });
     res.render('teams', {
       list: templist,

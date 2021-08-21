@@ -1,22 +1,10 @@
-const MONTHS = [
-  'января',
-  'февраля',
-  'марта',
-  'апреля',
-  'мая',
-  'июня',
-  'июля',
-  'августа',
-  'сентября',
-  'октября',
-  'ноября',
-  'декабря',
-];
+const { format } = require('date-fns');
+const { ru } = require('date-fns/locale');
 
 /**
- * @param {import('sequelize/types').Sequelize} sequelize 
- * @param {import('sequelize/types').DataTypes} DataTypes 
- * @param {import('sequelize/types').Model} Model 
+ * @param {import('sequelize/types').Sequelize} sequelize
+ * @param {import('sequelize/types').DataTypes} DataTypes
+ * @param {import('sequelize/types').Model} Model
  * @returns {import('sequelize/types').ModelDefined}
  */
 module.exports = (sequelize, DataTypes, Model) => {
@@ -40,13 +28,14 @@ module.exports = (sequelize, DataTypes, Model) => {
       date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW(),
-        get(){
+        get() {
           /**
            * @type {Date}
            */
-          const date = this.getDataValue('date')
-          return `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
-        }
+          const date = this.getDataValue('date');
+          // return `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+          return format(date, 'H:mm d MMMM yyyy', { locale: ru });
+        },
       },
       access: {
         type: DataTypes.INTEGER,

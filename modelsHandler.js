@@ -26,6 +26,6 @@ sequelize.modelManager.addModel(Teams);
 sequelize.sync({ alter: true });
 
 /**
- * @type {import('sequelize/types').ModelCtor}
+ * @type {import('sequelize/types').ModelDefined}
  */
 module.exports = sequelize.models;
