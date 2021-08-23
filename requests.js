@@ -26,19 +26,23 @@ module.exports = (sequelize, DataTypes, Model) => {
       },
       team_desc: {
         type: DataTypes.TEXT,
-        defaulValue: ""
+        defaulValue: '',
       },
       school: {
         type: DataTypes.TEXT,
-        defaulValue: ""
+        defaulValue: '',
       },
       boss: {
         type: DataTypes.TEXT,
-        defaulValue: ""
+        defaulValue: '',
       },
       status: {
         type: DataTypes.TEXT,
         defaulValue: 'unread',
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {

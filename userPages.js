@@ -38,8 +38,15 @@ class Controller {
     res.redirect('/');
   }
 
-  profile(req, res) {
-    res.render('profile', { user: req.user });
+  async profile(req, res) {
+    let status;
+    const request =
+      (await storage.Requests.findOne({ where: { user_id: req.user.id } })) ??
+      '';
+    if (request) {
+      status = request.status;
+    }
+    res.render('profile', { user: req.user, status: status ?? '' });
   }
 
   async postRegister(req, res) {
@@ -66,15 +73,23 @@ class Controller {
   }
 
   async postRequest(req, res) {
-    const request = JSON.stringify({
+    const request = {
       team_name: req.body.team_name,
-      team_desc: req.body.team_description,
+      team_desc: req.body.team_desc,
       school: req.body.school,
       boss: req.body.boss,
       status: 'unread',
-    });
-    Console.log(request);
-    res.redirect('/');
+    };
+    if (await storage.Requests.findOne({ where: { user_id: req.user.id } })) {
+      await storage.Requests.update(request, {
+        where: { user_id: req.user.id },
+      });
+    } else {
+      request.user_id = req.user.id;
+      await storage.Requests.create(request);
+    }
+
+    res.redirect('/profile');
   }
 }
 
