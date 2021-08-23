@@ -1,22 +1,9 @@
 const marked = require('marked');
-const { Op } = require('sequelize');
 const storage = require('./modelsHandler');
 
 class Controller {
-  async info(req, res) {
-    const info = (await storage.News.findAll({
-      where: { access: { [Op.lte]: req.user?.access ?? 0 } },
-    })) ?? { body: '' };
-    info.body = marked(info.body);
-    res.render('info', {
-      style_info: 'active-button',
-      page_name: 'Положение',
-      regulation: info.body,
-    });
-  }
-
   async home(req, res) {
-    const templist = (await storage.News.findAll({ where: { access: 1 } })) ?? {
+    const templist = (await storage.News.findAll({ where: { access: 0 } })) ?? {
       text: '',
     };
     templist
@@ -28,6 +15,18 @@ class Controller {
       list: templist,
       style_home: 'active-button',
       page_name: 'Новости',
+    });
+  }
+
+  async info(req, res) {
+    const info = (await storage.Pages.findOne({
+      where: { title: 'info' },
+    })) ?? { body: '' };
+    info.body = marked(info?.body ?? '');
+    res.render('info', {
+      style_info: 'active-button',
+      page_name: 'Положение',
+      regulation: info.body,
     });
   }
 
@@ -57,7 +56,7 @@ class Controller {
   }
 
   async teams(req, res) {
-    const templist = await storage.Teams.findAll() ?? {};
+    const templist = (await storage.Teams.findAll()) ?? {};
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
