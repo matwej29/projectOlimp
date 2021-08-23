@@ -5,7 +5,7 @@ const Console = require('Console');
 const storage = require('./modelsHandler');
 
 class Controller {
-  async home(req, res) {
+  async news(req, res) {
     const templist = await storage.News.findAll({
       where: { access: { [Op.lte]: req.user?.access ?? 0 } },
     });

@@ -26,12 +26,15 @@ module.exports = (sequelize, DataTypes, Model) => {
       },
       team_desc: {
         type: DataTypes.TEXT,
+        defaulValue: ""
       },
       school: {
         type: DataTypes.TEXT,
+        defaulValue: ""
       },
       boss: {
         type: DataTypes.TEXT,
+        defaulValue: ""
       },
       status: {
         type: DataTypes.TEXT,

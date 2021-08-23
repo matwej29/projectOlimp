@@ -58,7 +58,7 @@ module.exports = app => {
     failWithError: true,
   });
 
-  router.get('/', userPages.home);
+  router.get('/news', userPages.news);
 
   router.get('/login', userPages.getLogin);
 
