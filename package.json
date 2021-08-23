@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start-backend": "nodemon -e js,json,hbs index.js",
-    "start-frontend": "parcel watch --public-url /static/bundle ./frontend/index.js",
+    "start-frontend": "parcel watch --public-url /static/bundle",
     "build-frontend": "parcel build --public-url /static/bundle ./frontend/index.js",
     "eslint": "eslint \"**/*.{js,ts}\"",
     "test": "mocha"
@@ -49,8 +49,7 @@
   "targets": {
     "frontend": {
       "source": [
-        "./views",
-        "./frontend"
+        "./frontend/index.js"
       ],
       "distDir": "./static/bundle"
     },
