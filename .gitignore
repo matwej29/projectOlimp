@@ -6,3 +6,4 @@ static/bundle
 node_modules
 adminConfig.json
 .parcel-cache
+dbConfig.json
