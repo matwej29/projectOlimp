@@ -48,11 +48,11 @@ class Controller {
       layout: 'layoutA',
       style_admin: 'active-button',
       options: [
-        { value: '1', text: 'Все пользователи', selected: item.access === 1 },
+        { value: '0', text: 'Все пользователи', selected: item.access === 0 },
         {
-          value: '2',
+          value: '1',
           text: 'Только авторизованные пользователи',
-          selected: item.access === 2,
+          selected: item.access === 1,
         },
       ],
       accessChoiсe: true,

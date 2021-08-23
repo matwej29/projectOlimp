@@ -31,9 +31,9 @@ const MILLS_IN_DAY = 86400000;
 app.use(
   require('express-session')({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: MILLS_IN_DAY },
+    cookie: { maxAge: MILLS_IN_DAY * 10 },
   }),
 );
 
