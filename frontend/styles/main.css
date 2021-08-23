@@ -374,8 +374,8 @@ body {
   }
 
   .list-container__header {
-    font-size: 1.5vh;
-    width: 30vw;
+    font-size: 2vh;
+    width: 80vw;
   }
 
   .short-list_container {
@@ -399,7 +399,7 @@ body {
   }
 
   .partner_ref h1 {
-    font-size: 2.1vh;
+    font-size: 3vh;
   }
 
   .info-block {
@@ -410,7 +410,7 @@ body {
 
   .info-block_text {
     margin-right: 0;
-    font-size: 1.7vh;
+    font-size: 1.8vh;
   }
 
   .footer__items {
@@ -451,5 +451,9 @@ body {
     display: grid;
     grid-template-columns: 10fr 1fr 10fr;
     gap: 2vh;
+  }
+
+  .list-container__date {
+    font-size: 1.8vh;
   }
 }
