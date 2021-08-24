@@ -4,14 +4,24 @@ const express = require('express');
 const app = express();
 const hbs = require('hbs');
 const helmet = require('helmet'); // protection
+const session = require('express-session');
+const storePG = require('connect-pg-simple');
 
 app.use(
   helmet({
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        'script-src': ["'self'", 'https://cdn.jsdelivr.net', 'https://cdnjs.cloudflare.com'],
-        'connect-src': ["'self'", 'ws://localhost:1234'],
+        'script-src': [
+          "'self' 'unsafe-inline'",
+          'https://cdn.jsdelivr.net',
+          'https://cdnjs.cloudflare.com',
+        ],
+        'connect-src': [
+          "'self'",
+          'ws://localhost:1234',
+          'https://cdn.jsdelivr.net',
+        ],
       },
     },
   }),
@@ -27,11 +37,16 @@ app.use('/static', express.static(`${__dirname}/static`));
 const { NODE_ENV, PORT = 3000 } = process.env;
 const isProduction = NODE_ENV === 'production';
 
+const cfg = require('./dbConfig.json');
 const MILLS_IN_DAY = 86400000;
 app.use(
-  require('express-session')({
+  session({
+    store: new (storePG(session))({
+      createTableIfMissing: true,
+      conString: `postgres://${cfg.username}:${cfg.password}@${cfg.host}:${cfg.port}/${cfg.database}`,
+    }),
     secret: 'keyboard cat',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: { maxAge: MILLS_IN_DAY * 10 },
   }),
