@@ -14,7 +14,8 @@ class Controller {
     res.render('home', {
       list: templist,
       style_home: 'active-button',
-      page_name: 'Новости',
+      page_name: 'Главная',
+      user: req?.user,
     });
   }
 
@@ -27,6 +28,7 @@ class Controller {
       style_info: 'active-button',
       page_name: 'Положение',
       regulation: info.body,
+      user: req?.user,
     });
   }
 
@@ -38,6 +40,7 @@ class Controller {
     res.render('organizers', {
       style_org: 'active-button',
       page_name: 'Организаторы',
+      user: req?.user,
     });
   }
 
@@ -45,6 +48,7 @@ class Controller {
     res.render('partners', {
       style_part: 'active-button',
       page_name: 'Партнеры',
+      user: req?.user,
     });
   }
 
@@ -52,6 +56,7 @@ class Controller {
     res.render('help', {
       style_help: 'active-button',
       page_name: 'Помощь',
+      user: req?.user,
     });
   }
 
@@ -66,6 +71,7 @@ class Controller {
       list: templist,
       style_teams: 'active-button',
       page_name: 'Команды',
+      user: req?.user,
     });
   }
 }

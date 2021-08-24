@@ -16,8 +16,9 @@ class Controller {
       });
     res.render('home', {
       list: templist,
-      style_home: 'active-button',
+      style_news: 'active-button',
       page_name: 'Новости',
+      user: req?.user,
     });
   }
 
@@ -30,7 +31,7 @@ class Controller {
   }
 
   async postLogin(req, res) {
-    res.redirect('/');
+    res.redirect('/news');
   }
 
   logout(req, res) {

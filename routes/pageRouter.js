@@ -6,8 +6,6 @@ const pages = new PagesController();
 
 router.get('/', pages.home);
 
-// router.get('/news', pages.news);
-
 router.get('/info', pages.info);
 
 router.get('/home', pages.home);
