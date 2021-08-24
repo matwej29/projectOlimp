@@ -2,16 +2,19 @@
   {{!-- ID:
   {{user.id}}<br /> --}}
   {{#if user.email}}
-    Email:
-    {{user.email}}<br />
+  Email:
+  {{user.email}}<br />
   {{/if}}
 </p>
 {{#if status}}
-  Статус:
-  {{status}}</br>
-    <a href="/request">Изменить заявку</a>
-  {{else}}
-    <a href="/request">Подать заявку</a> 
+Статус:
+{{status}}</br>
+<a href="/request">Изменить заявку</a>
+{{else}}
+<a href="/request">Подать заявку</a>
+{{/if}}
+{{#if reason}}
+<p>Причина отклонения заявки: {{reason}}</p>
 {{/if}}
 
 <a href="/logout">Log out</a>

@@ -22,6 +22,9 @@ app.use(
           'ws://localhost:1234',
           'https://cdn.jsdelivr.net',
         ],
+        'script-src-attr': [
+          "'self' 'unsafe-inline'"
+        ]
       },
     },
   }),

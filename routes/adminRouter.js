@@ -52,4 +52,8 @@ router.get('/admin/info/edit', auth, adminPages.getInfo);
 
 router.post('/admin/info/edit', auth, adminPages.postInfo);
 
+router.get('/admin/requests', auth, adminPages.requests);
+
+router.post('/admin/rejectRequest', auth, adminPages.rejectRequest);
+
 module.exports = router;

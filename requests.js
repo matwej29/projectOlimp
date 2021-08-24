@@ -21,34 +21,37 @@ module.exports = (sequelize, DataTypes, Model) => {
         autoIncrement: true,
       },
       team_name: {
-        type: DataTypes.TEXT,
+        type: DataTypes.CHAR(60),
         allowNull: false,
       },
       team_desc: {
-        type: DataTypes.TEXT,
+        type: DataTypes.CHAR(200),
         defaulValue: '',
       },
       school: {
-        type: DataTypes.TEXT,
+        type: DataTypes.CHAR(50),
         defaulValue: '',
       },
       boss: {
-        type: DataTypes.TEXT,
+        type: DataTypes.CHAR(50),
         defaulValue: '',
       },
       status: {
-        type: DataTypes.TEXT,
+        type: DataTypes.CHAR(20),
         defaulValue: 'unread',
       },
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      reason: {
+        type: DataTypes.CHAR(20)
+      }
     },
     {
       sequelize,
       modelName: 'Requests',
-      timestamps: false,
+      timestamps: true,
       tableName: 'requests',
     },
   );

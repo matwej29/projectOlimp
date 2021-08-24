@@ -71,6 +71,23 @@ class Controller {
     );
     res.redirect('/admin/info');
   }
+
+  async requests(req, res) {
+    // не работает - a.status && 'unread' - b.status && ('rejected' || 'accepted')
+    const requests = (await storage.Requests.findAll()).sort((a,b) => b.id - a.id);
+    res.render('requestsA', {
+      layout: 'layoutA',
+      requests,
+    });
+  }
+
+  async rejectRequest(req, res) {
+    console.log(req.query);
+    await storage.Requests.update(
+      { status: 'rejected', reason: req.query?.reason },
+      { where: { id: req.query.id } },
+    );
+  }
 }
 
 module.exports = Controller;

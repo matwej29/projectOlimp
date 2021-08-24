@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes, Model) => {
       },
       email: {
         type: DataTypes.TEXT('tiny'),
-        validate: { isEmail: true },
+        // validate: { isEmail: true },
         unique: true,
         allowNull: false,
       },

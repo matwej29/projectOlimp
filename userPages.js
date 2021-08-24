@@ -40,14 +40,14 @@ class Controller {
   }
 
   async profile(req, res) {
-    let status;
     const request =
       (await storage.Requests.findOne({ where: { user_id: req.user.id } })) ??
-      '';
-    if (request) {
-      status = request.status;
-    }
-    res.render('profile', { user: req.user, status: status ?? '' });
+      {};
+    res.render('profile', {
+      user: req.user,
+      status: request?.status,
+      reason: request?.reason,
+    });
   }
 
   async postRegister(req, res) {
