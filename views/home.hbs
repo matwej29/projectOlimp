@@ -1,13 +1,35 @@
+<div class="inpage-header each-list-container">
+  <div class="header_content">
+    <div class="header_title">
+      <img class="spaced" src="/static/img/logo.svg" width="100px">
+      <h1 class="header_title-text">Проектный Олимп</h1>
+    </div>
+    <p class="header_text">Время искусственно созданных задач давно ушло. Современные школьники хотят, а
+      главное могут решать реальные и насущные проблемы. В процессе участия в Конкурсе «Проектный Олимп»
+      будут созданы проекты, основанные на действительных фактах, которые позволят участникам
+      почувствовать важность и ответственность за свои решения.</p>
+    <p class="header_text">
+      Моделирование и воспроизведение реальных условий при помощи работы в командах обеспечат
+      захватывающий опыт, который откроет путь от теоретического обучения к насущным проблемам, которые
+      ставят нам предприятия нашего города, города, в котором мы живем.</p>
+    <p class="header_text">
+      Прошло и то время, когда обучение сводилось к получению теоретических знаний, а не на применении
+      этой теории в сложных реальных ситуациях. Конкурс «Проектный Олимп» позволит участникам раскрыть
+      свои таланты и потенциал, даст толчок к развитию профессиональных знаний, важных и необходимых для
+      будущей работы софтскиллс.</p>
+  </div>
+  <img class="content-img" src="/static/img/header-img.svg">
+</div>
 <div class='content_main-block centering'>
   <div class='column-reverse'>
     {{#each this.list}}
-      <div class='each-list-container centering'>
-        <div class='list-container__header'>
-          <h1>{{this.header}}</h1>
-        </div>
-        <div class='list-container__date'>{{this.date}}</div>
-        <div class='list-container__text break-word'>{{{this.text}}}</div>
+    <div class='each-list-container centering'>
+      <div class='list-container__header'>
+        <h1>{{this.header}}</h1>
       </div>
+      <div class='list-container__date'>{{this.date}}</div>
+      <div class='list-container__text break-word'>{{{this.text}}}</div>
+    </div>
     {{/each}}
   </div>
 </div>
