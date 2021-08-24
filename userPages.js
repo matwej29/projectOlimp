@@ -14,7 +14,7 @@ class Controller {
       .forEach(element => {
         element.text = marked(element.text);
       });
-    res.render('home', {
+    res.render('news', {
       list: templist,
       style_news: 'active-button',
       page_name: 'Новости',
