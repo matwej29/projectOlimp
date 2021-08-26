@@ -6,6 +6,18 @@ const hbs = require('hbs');
 const helmet = require('helmet'); // protection
 const session = require('express-session');
 const storePG = require('connect-pg-simple');
+const mailer = require('express-mailer');
+const mailCfg = require('./mailConfig.json');
+
+mailer.extend(app, {
+  from: mailCfg.from,
+  host: mailCfg.host,
+  secureConnection: mailCfg.secure,
+  port: mailCfg.port,
+  transportMethod: mailCfg.method,
+  auth: {user: mailCfg.user, pass: mailCfg.password}
+});
+//"password": "Rts45891"
 
 app.use(
   helmet({
@@ -22,9 +34,7 @@ app.use(
           'ws://localhost:1234',
           'https://cdn.jsdelivr.net',
         ],
-        'script-src-attr': [
-          "'self' 'unsafe-inline'"
-        ]
+        'script-src-attr': ["'self' 'unsafe-inline'"],
       },
     },
   }),
@@ -44,10 +54,6 @@ const cfg = require('./dbConfig.json');
 const MILLS_IN_DAY = 86400000;
 app.use(
   session({
-    store: new (storePG(session))({
-      createTableIfMissing: true,
-      conString: `postgres://${cfg.username}:${cfg.password}@${cfg.host}:${cfg.port}/${cfg.database}`,
-    }),
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
