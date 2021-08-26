@@ -92,6 +92,35 @@ class Controller {
 
     res.redirect('/profile');
   }
+  // затычка, устал и лень доделывать
+
+  getRecover(req, res) {
+    res.render('recover');
+    res.mailer.send(
+      'email',
+      {
+        to: req.user.email,
+        subject: 'Проверка',
+        layout: 'layoutE',
+        value: 5,
+      },
+      (err) => {
+        if (err != null) {
+          Console.log(err);
+        }
+      },
+    );
+  }
+
+  // затычка... см выше
+
+  postRecover(req, res) {
+    if (req.body.value == 5) {
+      res.redirect('profile');
+    } else {
+      res.send('err');
+    }
+  }
 }
 
 module.exports = Controller;
