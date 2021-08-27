@@ -56,4 +56,6 @@ router.get('/admin/requests', auth, adminPages.requests);
 
 router.post('/admin/rejectRequest', auth, adminPages.rejectRequest);
 
+router.post('/admin/acceptRequest', auth, adminPages.acceptRequest);
+
 module.exports = router;

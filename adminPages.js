@@ -74,7 +74,9 @@ class Controller {
 
   async requests(req, res) {
     // не работает - a.status && 'unread' - b.status && ('rejected' || 'accepted')
-    const requests = (await storage.Requests.findAll()).sort((a,b) => b.id - a.id);
+    const requests = (await storage.Requests.findAll()).sort(
+      (a, b) => b.id - a.id,
+    );
     res.render('requestsA', {
       layout: 'layoutA',
       requests,
@@ -82,9 +84,15 @@ class Controller {
   }
 
   async rejectRequest(req, res) {
-    console.log(req.query);
     await storage.Requests.update(
       { status: 'rejected', reason: req.query?.reason },
+      { where: { id: req.query.id } },
+    );
+  }
+
+  async acceptRequest(req, res) {
+    await storage.Requests.update(
+      { status: 'accepted' },
       { where: { id: req.query.id } },
     );
   }

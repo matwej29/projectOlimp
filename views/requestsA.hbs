@@ -16,13 +16,10 @@
             <th scope="col">{{ id }}</th>
             <th scope="col">{{ team_name }}</th>
             <th scope="col">
-                <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target='#exampleModal{{ id }}'>
                     Открыть описание
                 </button>
-
-                <!-- Modal -->
                 <div class="modal fade" id="exampleModal{{ id }}" tabindex="-1"
                     aria-labelledby="exampleModalLabel{{ id }}" aria-hidden="true">
                     <div class="modal-dialog">
@@ -47,7 +44,8 @@
             <th scope="col">{{ status }}</th>
             <th scope="col">
                 <div class='btn-group' role="group">
-                    <button class='btn btn-primary'>Подтвердить</button>
+                    <script></script>
+                    <button class='btn btn-primary' onclick="acceptRequest({{id}})">Подтвердить</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reject{{id}}">
                         Отклонить
                     </button>
@@ -63,12 +61,11 @@
                                 <textarea class="modal-body" id='rejectDesc{{id}}'
                                     placeholder="Причина отклонения заявки">{{ reason }}</textarea>
                                 <div class="modal-footer">
-                                    <script>function sendReject(){ fetch(`/admin/rejectRequest?id={{id}}&reason=${document.getElementById("rejectDesc{{id}}").value}`, { headers: { Accept: 'application/json, *.*', 'Content-Type': 'application/json;charset=utf-8' }, method: 'POST'}); }</script>
-                                    <button type="button" class="btn btn-secondary" onclick="alert('asd')"
+                                    <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="sendReject()">Save
+                                    <button type="button" class="btn btn-primary" onclick="rejectRequest({{id}})">Save
                                         changes</button>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -79,4 +76,30 @@
         {{/each}}
     </tbody>
 </table>
-<script></script>
+<script>function rejectRequest(id) {
+        fetch(
+            `/admin/rejectRequest?id=${id}&reason=${document.getElementById(`rejectDesc${id}`).value
+            }`,
+            {
+                headers: {
+                    Accept: 'application/json, *.*',
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                method: 'POST',
+            },
+        );
+        document.location.reload();
+    }</script>
+<script>function acceptRequest(id) {
+        fetch(
+            `/admin/acceptRequest?id=${id}`,
+            {
+                headers: {
+                    Accept: 'application/json, *.*',
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                method: 'POST',
+            },
+        );
+        document.location.reload();
+    }</script>
