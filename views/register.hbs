@@ -1,14 +1,20 @@
-<form action="/registration" method="post">
-    <div>
-        <label>Email:</label>
+<div class="register-container centering">
+  <div style="margin-top: -1vh;">
+    <h1>Регистрация</h1>
+  </div>
+  <div class="info-block__text">
+    <form action="/registration" method="post">
+      <div class="register-line">
+        <b>Email</b>
         <input class="input" type="text" name="email" />
-    </div>
-    <p></p>
-    <div>
-        <label>Password:</label>
+      </div>
+      <div class="register-line">
+        <b>Пароль</b>
         <input class="input" type="password" name="password" />
-    </div>
-    <div>
-        <input class="button button_size_normal button_style_action" type="submit" value="Submit" />
-    </div>
-</form>
+      </div>
+      <div class="register-line centering">
+        <input class="button" type="submit" value="Зарегистрироваться" />
+      </div>
+    </form>
+  </div>
+</div>
