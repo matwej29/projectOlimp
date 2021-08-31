@@ -1,9 +1,9 @@
 {
-    "from": "no-reply@polimp.ru вообще нигде не появляется в письме....(",
+    "from": "no-reply@polimp.ru",
     "host": "smtp.gmail.com",
     "secure": true,
     "port": 465,
     "method": "SMTP",
-    "user": "твой адрес гугла @gmail.com",
-    "password": "пароль, только в настройках гугла нужно разрешить вход с небезопасных приложений, если что ссылку выдаст в логе"
+    "user": "artembalinqwer@gmail.com",
+    "password": "q23886000"
 }

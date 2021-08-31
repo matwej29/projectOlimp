@@ -96,7 +96,7 @@ class Controller {
   }
 
   getRecover(req, res) {
-    res.render('recover', {error: req.flash('error')});
+    res.render('recover', { error: req.flash('error') });
   }
 
   async postRecover(req, res) {
@@ -128,14 +128,15 @@ class Controller {
         }
       },
     );
+    res.redirect('/');
   }
 
   // /reset/:token
   async getReset(req, res) {
     const user = await storage.Users.findOne({
       where: {
-        resetPasswordToken: req.param.token,
-        resetPasswordExpires: { [Op.gte]: Date.now() },
+        resetPasswordToken: req.params.token,
+        // resetPasswordExpires: { [Op.gte]: Date.now() },
       },
     });
     if (!user) {
@@ -144,7 +145,7 @@ class Controller {
     }
     res.render('reset', {
       email: user.email,
-      token: req.params.token
+      token: req.params.token,
     });
   }
 
@@ -153,7 +154,7 @@ class Controller {
     const user = await storage.Users.findOne({
       where: {
         resetPasswordToken: req.params.token,
-        resetPasswordExpires: { [Op.gte]: Date.now() },
+        // resetPasswordExpires: { [Op.gte]: Date.now() },
       },
     });
     if (!user) {
