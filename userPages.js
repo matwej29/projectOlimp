@@ -1,5 +1,7 @@
 const marked = require('marked');
 
+const cryptoString = require('crypto-random-string');
+const datefns = require('date-fns');
 const { Op } = require('sequelize');
 const Console = require('Console');
 const storage = require('./modelsHandler');
@@ -92,34 +94,93 @@ class Controller {
 
     res.redirect('/profile');
   }
-  // затычка, устал и лень доделывать
 
   getRecover(req, res) {
-    res.render('recover');
+    res.render('recover', {error: req.flash('error')});
+  }
+
+  async postRecover(req, res) {
+    const user = await storage.Users.findOne({
+      where: { email: req.body.email },
+    });
+    if (!user) {
+      req.flash('error', 'Пользователь с указанной почтой не найден');
+      return res.redirect('/recover');
+    }
+    const token = cryptoString(20);
+    user.update({
+      resetPasswordToken: token,
+      resetPasswordExpires: datefns.add(Date.now(), { day: 1 }),
+    });
     res.mailer.send(
       'email',
       {
-        to: req.user.email,
-        subject: 'Проверка',
+        to: req.body.email,
+        subject: 'Восстановление пароля',
         layout: 'layoutE',
-        value: 5,
+        value: `Вы получили это письмо, потому что вы (или кто-то еще) запросил сброс пароля от вашего аккаунта \n\n
+        Для того, чтобы сбросить пароль, проследуйте по ссылке - http://${req.headers.host}/reset/${token} \n\n
+        Ссылка истекает через 24 часа`,
       },
-      (err) => {
+      err => {
         if (err != null) {
-          Console.log(err);
+          Console.error(err);
         }
       },
     );
   }
 
-  // затычка... см выше
-
-  postRecover(req, res) {
-    if (req.body.value == 5) {
-      res.redirect('profile');
-    } else {
-      res.send('err');
+  // /reset/:token
+  async getReset(req, res) {
+    const user = await storage.Users.findOne({
+      where: {
+        resetPasswordToken: req.param.token,
+        resetPasswordExpires: { [Op.gte]: Date.now() },
+      },
+    });
+    if (!user) {
+      req.flash('error', 'Токен сброса пароля неправильный или просроченный');
+      return res.redirect('/recover');
     }
+    res.render('reset', {
+      email: user.email,
+      token: req.params.token
+    });
+  }
+
+  // /reset/:token
+  async postReset(req, res) {
+    const user = await storage.Users.findOne({
+      where: {
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { [Op.gte]: Date.now() },
+      },
+    });
+    if (!user) {
+      req.flash('error', 'Токен сброса пароля неправильный или просроченный');
+      return res.redirect('back');
+    }
+    user.update({
+      password: req.body.password,
+      resetPasswordToken: undefined,
+      resetPasswordExpires: undefined,
+    });
+    res.mailer.send(
+      'email',
+      {
+        to: user.email,
+        subject: 'Ваш пароль был обновлен',
+        layout: 'layoutE',
+        value: `Здравствуйте, \n\n
+        Ваш пароль был обновлен`,
+      },
+      err => {
+        if (err != null) {
+          Console.log(err);
+        }
+      },
+    );
+    res.redirect('/login');
   }
 }
 

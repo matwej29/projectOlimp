@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
-const saltRounds = 10;
+const saltRounds = 15;
 
 /**
- * 
- * @param {import('sequelize').Sequelize} sequelize 
- * @param {import('sequelize').DataTypes} DataTypes 
- * @param {import('sequelize').Model} Model 
- * @returns 
+ *
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize').DataTypes} DataTypes
+ * @param {import('sequelize').Model} Model
+ * @returns
  */
 module.exports = (sequelize, DataTypes, Model) => {
   class Users extends Model {}
@@ -31,6 +31,12 @@ module.exports = (sequelize, DataTypes, Model) => {
       },
       access: {
         type: DataTypes.INTEGER,
+      },
+      resetPasswordToken: {
+        type: DataTypes.STRING,
+      },
+      resetPasswordExpires: {
+        type: DataTypes.DATE,
       },
     },
     {

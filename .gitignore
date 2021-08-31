@@ -7,3 +7,4 @@ node_modules
 adminConfig.json
 .parcel-cache
 dbConfig.json
+mailConfig.json

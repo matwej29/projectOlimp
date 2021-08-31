@@ -75,9 +75,13 @@ module.exports = app => {
 
   router.post('/request', ensureLoggedIn('/login'), userPages.postRequest);
 
-  router.get('/recover', ensureLoggedIn('/login'), userPages.getRecover);
+  router.get('/recover', userPages.getRecover);
 
-  router.post('/recover', ensureLoggedIn('/login'), userPages.postRecover);
+  router.post('/recover', userPages.postRecover);
+
+  router.get('/reset/:token', userPages.getReset);
+
+  router.post('/reset/:token', userPages.postReset);
 
   return router;
 };

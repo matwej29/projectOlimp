@@ -82,7 +82,6 @@ class Controller {
   }
 
   async rejectRequest(req, res) {
-    console.log(req.query);
     await storage.Requests.update(
       { status: 'rejected', reason: req.query?.reason },
       { where: { id: req.query.id } },
