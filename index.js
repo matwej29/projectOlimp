@@ -5,7 +5,17 @@ const app = express();
 const hbs = require('hbs');
 const helmet = require('helmet'); // protection
 const session = require('express-session');
-const storePG = require('connect-pg-simple');
+const mailer = require('express-mailer');
+const mailCfg = require('./mailConfig.json');
+
+mailer.extend(app, {
+  from: mailCfg.from,
+  host: mailCfg.host,
+  secureConnection: mailCfg.secure,
+  port: mailCfg.port,
+  transportMethod: mailCfg.method,
+  auth: { user: mailCfg.user, pass: mailCfg.password },
+});
 
 app.use(
   helmet({
@@ -22,9 +32,7 @@ app.use(
           'ws://localhost:1234',
           'https://cdn.jsdelivr.net',
         ],
-        'script-src-attr': [
-          "'self' 'unsafe-inline'"
-        ]
+        'script-src-attr': ["'self' 'unsafe-inline'"],
       },
     },
   }),
@@ -40,18 +48,30 @@ app.use('/static', express.static(`${__dirname}/static`));
 const { NODE_ENV, PORT = 3000 } = process.env;
 const isProduction = NODE_ENV === 'production';
 
+const Sequelize = require('sequelize');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const cfg = require('./dbConfig.json');
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  host: cfg.host,
+  password: cfg.password,
+  port: cfg.port,
+  username: cfg.username,
+  database: cfg.database,
+  logging: false,
+});
+sequelize.sync({ alter: true });
+
 const MILLS_IN_DAY = 86400000;
 app.use(
   session({
-    store: new (storePG(session))({
-      createTableIfMissing: true,
-      conString: `postgres://${cfg.username}:${cfg.password}@${cfg.host}:${cfg.port}/${cfg.database}`,
-    }),
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: MILLS_IN_DAY * 10 },
+    store: new SequelizeStore({
+      db: sequelize,
+    }),
   }),
 );
 

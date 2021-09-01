@@ -1,0 +1,9 @@
+{
+    "from": "no-reply@polimp.ru",
+    "host": "smtp.gmail.com",
+    "secure": true,
+    "port": 465,
+    "method": "SMTP",
+    "user": "artembalinqwer@gmail.com",
+    "password": "q23886000"
+}
