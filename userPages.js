@@ -110,7 +110,7 @@ class Controller {
     const token = cryptoString(20);
     user.update({
       resetPasswordToken: token,
-      resetPasswordExpires: datefns.add(Date.now(), { day: 1 }),
+      resetPasswordExpires: datefns.add(Date.now(), { days: 1 }),
     });
     res.mailer.send(
       'email',
@@ -136,7 +136,7 @@ class Controller {
     const user = await storage.Users.findOne({
       where: {
         resetPasswordToken: req.params.token,
-        // resetPasswordExpires: { [Op.gte]: Date.now() },
+        resetPasswordExpires: { [Op.gte]: Date.now() },
       },
     });
     if (!user) {
@@ -154,7 +154,7 @@ class Controller {
     const user = await storage.Users.findOne({
       where: {
         resetPasswordToken: req.params.token,
-        // resetPasswordExpires: { [Op.gte]: Date.now() },
+        resetPasswordExpires: { [Op.gte]: Date.now() },
       },
     });
     if (!user) {
