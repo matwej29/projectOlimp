@@ -1,7 +1,28 @@
-<form action='request' method='POST'>
-  <input type='text' name='team_name' placeholder='Название команды' />
-  <input type='text' name='team_desc' placeholder='Описание команды' />
-  <input type='text' name='school' placeholder='Школа' />
-  <input type='text' name='boss' placeholder='Руководитель' />
-  <button type='submit' style='width: 5vh; height: 3vh'>Подтвердить</button>
-</form>
+<div class="register-container centering">
+  <div style="margin-top: -1vh;">
+    <h1>Подача заявки</h1>
+  </div>
+  <div class="info-block__text">
+    <form action="request" method="POST">
+      <div class="register-line">
+        <b class="register-title">Название команды</b>
+        <input class="input" type="text" name="team_name" />
+      </div>
+      <div class="register-line">
+        <b class="register-title">Описание команды</b>
+        <input class="input" type="text" name="team_desc" />
+      </div>
+      <div class="register-line">
+        <b class="register-title">Школа</b>
+        <input class="input" type="text" name="school" />
+      </div>
+      <div class="register-line">
+        <b class="register-title">Руководитель</b>
+        <input class="input" type="text" name="boss" />
+      </div>
+      <div class="register-line centering">
+        <input class="button" type="submit" value="Подтвердить" />
+      </div>
+    </form>
+  </div>
+</div>

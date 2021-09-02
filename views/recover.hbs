@@ -1,6 +1,17 @@
-<p>Почта, указанная при регистрации</p>
-<form action="/recover" method="POST">
-    <input type="email" name="email" placeholder="email">
-    <button type="submit" style="width: 5vh; height:4vh;">Отправить</button>
-</form>
-<p>{{error}}</p>
+<div class="register-container centering">
+    <div style="margin-top: -1vh;">
+        <h1>Восстановление</h1>
+    </div>
+    <div class="info-block__text">
+        <form action="/recover" method="POST">
+            <div class="register-line">
+                <b class="register-title">Email</b>
+                <input class="input" type="email" name="email" />
+            </div>
+            <div class="register-line centering">
+                <input class="button" type="submit" value="Отправить"></input>
+            </div>
+        </form>
+        <p>{{error}}</p>
+    </div>
+</div>
