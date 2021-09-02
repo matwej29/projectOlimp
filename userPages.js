@@ -1,30 +1,26 @@
 const marked = require('marked');
 
+const cryptoString = require('crypto-random-string');
+const datefns = require('date-fns');
 const { Op } = require('sequelize');
 const Console = require('Console');
-const storage = require('./news.js');
-const users = require('./users.js');
-const { Users } = users;
-
-// const pages = require('./pageModel.js');
-
-const formatDate = require('./modules/formatDate.js');
+const storage = require('./modelsHandler');
 
 class Controller {
-  async home(req, res) {
+  async news(req, res) {
     const templist = await storage.News.findAll({
-      where: { access: { [Op.or]: [{ [Op.lte]: req.user.access }, 1] } },
+      where: { access: { [Op.lte]: req.user?.access ?? 0 } },
     });
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(element => {
         element.text = marked(element.text);
-        element.date = formatDate(element.date);
       });
-    res.render('home', {
+    res.render('news', {
       list: templist,
-      style_home: 'active-button',
+      style_news: 'active-button',
       page_name: 'Новости',
+      user: req?.user,
     });
   }
 
@@ -37,7 +33,7 @@ class Controller {
   }
 
   async postLogin(req, res) {
-    res.redirect('/');
+    res.redirect('/news');
   }
 
   logout(req, res) {
@@ -45,18 +41,25 @@ class Controller {
     res.redirect('/');
   }
 
-  profile(req, res) {
-    res.render('profile', { user: req.user });
+  async profile(req, res) {
+    const request =
+      (await storage.Requests.findOne({ where: { user_id: req.user.id } })) ??
+      {};
+    res.render('profile', {
+      user: req.user,
+      status: request?.status,
+      reason: request?.reason,
+    });
   }
 
   async postRegister(req, res) {
-    if (await Users.findOne({ where: { email: req.body.email } })) {
+    if (await storage.Users.findOne({ where: { email: req.body.email } })) {
       res.redirect('/');
     } else {
-      await Users.create({
+      await storage.Users.create({
         password: req.body.password,
         email: req.body.email,
-        access: 0,
+        access: 1,
       }).catch(err => {
         res.send(err);
       });
@@ -66,6 +69,119 @@ class Controller {
 
   getRegister(req, res) {
     res.render('register');
+  }
+
+  getRequest(req, res) {
+    res.render('request', { user: req.user });
+  }
+
+  async postRequest(req, res) {
+    const request = {
+      team_name: req.body.team_name,
+      team_desc: req.body.team_desc,
+      school: req.body.school,
+      boss: req.body.boss,
+      status: 'unread',
+    };
+    if (await storage.Requests.findOne({ where: { user_id: req.user.id } })) {
+      await storage.Requests.update(request, {
+        where: { user_id: req.user.id },
+      });
+    } else {
+      request.user_id = req.user.id;
+      await storage.Requests.create(request);
+    }
+
+    res.redirect('/profile');
+  }
+
+  getRecover(req, res) {
+    res.render('recover', { error: req.flash('error') });
+  }
+
+  async postRecover(req, res) {
+    const user = await storage.Users.findOne({
+      where: { email: req.body.email },
+    });
+    if (!user) {
+      req.flash('error', 'Пользователь с указанной почтой не найден');
+      return res.redirect('/recover');
+    }
+    const token = cryptoString(20);
+    user.update({
+      resetPasswordToken: token,
+      resetPasswordExpires: datefns.add(Date.now(), { days: 1 }),
+    });
+    res.mailer.send(
+      'email',
+      {
+        to: req.body.email,
+        subject: 'Восстановление пароля',
+        layout: 'layoutE',
+        value: `Вы получили это письмо, потому что вы (или кто-то еще) запросил сброс пароля от вашего аккаунта \n\n
+        Для того, чтобы сбросить пароль, проследуйте по ссылке - http://${req.headers.host}/reset/${token} \n\n
+        Ссылка истекает через 24 часа`,
+      },
+      err => {
+        if (err != null) {
+          Console.error(err);
+        }
+      },
+    );
+    res.redirect('/');
+  }
+
+  // /reset/:token
+  async getReset(req, res) {
+    const user = await storage.Users.findOne({
+      where: {
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { [Op.gte]: Date.now() },
+      },
+    });
+    if (!user) {
+      req.flash('error', 'Токен сброса пароля неправильный или просроченный');
+      return res.redirect('/recover');
+    }
+    res.render('reset', {
+      email: user.email,
+      token: req.params.token,
+    });
+  }
+
+  // /reset/:token
+  async postReset(req, res) {
+    const user = await storage.Users.findOne({
+      where: {
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { [Op.gte]: Date.now() },
+      },
+    });
+    if (!user) {
+      req.flash('error', 'Токен сброса пароля неправильный или просроченный');
+      return res.redirect('back');
+    }
+    user.update({
+      password: req.body.password,
+      resetPasswordToken: undefined,
+      resetPasswordExpires: undefined,
+    });
+    res.mailer.send(
+      'email',
+      {
+        to: user.email,
+        subject: 'Ваш пароль был обновлен',
+        layout: 'layoutE',
+        value: `Здравствуйте, \n\n
+        Ваш пароль был обновлен`,
+      },
+      err => {
+        if (err != null) {
+          Console.log(err);
+        }
+      },
+    );
+    res.redirect('/login');
   }
 }
 

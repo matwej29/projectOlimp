@@ -1,2 +1,1 @@
-import "./styles/main";
-import "./scripts/front";
+import('./styles/main.css');

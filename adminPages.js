@@ -1,60 +1,58 @@
 const marked = require('marked');
 
-const storage = require('./news.js');
-
-const BDteam = require('./teams.js');
-const dbTeam = new BDteam();
-
-const pages = require('./pageModel.js');
-
-const formatDate = require('./modules/formatDate.js');
-// const Console = require('Console');
+const storage = require('./modelsHandler');
 
 class Controller {
   async home(req, res) {
     const templist = await storage.News.findAll();
-    
     templist
-      .sort((a, b) => a.id - b.id)
+      .sort((a, b) => b.id - a.id)
       .forEach(async element => {
-        element.text = undefined ? '' : marked(element.text);
-        element.date = formatDate(element.date);
+        element.text = marked(element?.text ?? '');
       });
-    res.render('homeA', {
+    res.render('cardList', {
       list: templist,
       layout: 'layoutA',
       style_admin: 'active-button',
+      page_name: 'Новости',
+      path: 'news',
     });
   }
 
   async teams(req, res) {
-    const templist = await dbTeam.teams();
+    const templist = await storage.Teams.findAll();
     templist
-      .sort((a, b) => a.id - b.id)
+      .sort((a, b) => b.id - a.id)
       .forEach(async element => {
-        element.description = undefined ? '' : element.description;
-        element.description = marked(element.description);
+        element.header = element.name;
+        element.text = marked(element?.description ?? '');
       });
-    res.render('teamsA', {
+    res.render('cardList', {
       list: templist,
       layout: 'layoutA',
       style_teams: 'active-button',
+      page_name: 'Команды',
+      path: 'teams',
     });
   }
 
   async info(req, res) {
-    const info = await pages.Pages.findOne({ where: { title: 'info' } });
+    const info = (await storage.Pages.findOne({
+      where: { title: 'info' },
+    })) ?? { body: '' };
     info.body = marked(info.body);
 
     res.render('infoA', {
       regulation: info.body,
       style_info: 'active-button',
       layout: 'layoutA',
+      page_name: 'Положение',
     });
   }
 
   async getInfo(req, res) {
-    const item = await pages.Pages.findOne({ where: { title: 'info' } });
+    const item =
+      (await storage.Pages.findOne({ where: { title: 'info' } })) ?? '';
     res.render('edit', {
       action: `/admin/info/edit`,
       firstValue: 'Положение',
@@ -67,11 +65,36 @@ class Controller {
   }
 
   async postInfo(req, res) {
-    await pages.Pages.update(
-      { body: req.body.text },
+    await storage.Pages.upsert(
+      { title: 'info', body: req.body.text },
       { where: { title: 'info' } },
     );
     res.redirect('/admin/info');
+  }
+
+  async requests(req, res) {
+    // не работает - a.status && 'unread' - b.status && ('rejected' || 'accepted')
+    const requests = (await storage.Requests.findAll()).sort(
+      (a, b) => b.id - a.id,
+    );
+    res.render('requestsA', {
+      layout: 'layoutA',
+      requests,
+    });
+  }
+
+  async rejectRequest(req, res) {
+    await storage.Requests.update(
+      { status: 'rejected', reason: req.query?.reason },
+      { where: { id: req.query.id } },
+    );
+  }
+
+  async acceptRequest(req, res) {
+    await storage.Requests.update(
+      { status: 'accepted' },
+      { where: { id: req.query.id } },
+    );
   }
 }
 

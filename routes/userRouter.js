@@ -1,5 +1,4 @@
 const express = require('express');
-// const app = express();
 
 const router = express.Router();
 const passport = require('passport');
@@ -7,9 +6,7 @@ const { Strategy } = require('passport-local');
 const { ensureLoggedIn } = require('connect-ensure-login');
 const flash = require('connect-flash');
 
-const Console = require('Console');
-const users = require('../users.js');
-const { Users } = users;
+const { Users } = require('../modelsHandler');
 
 const UserPages = require('../userPages');
 const userPages = new UserPages();
@@ -60,7 +57,7 @@ module.exports = app => {
     failWithError: true,
   });
 
-  router.get('/', ensureLoggedIn(), userPages.home);
+  router.get('/news', userPages.news);
 
   router.get('/login', userPages.getLogin);
 
@@ -73,6 +70,18 @@ module.exports = app => {
   router.get('/registration', userPages.getRegister);
 
   router.post('/registration', userPages.postRegister);
+
+  router.get('/request', ensureLoggedIn('/login'), userPages.getRequest);
+
+  router.post('/request', ensureLoggedIn('/login'), userPages.postRequest);
+
+  router.get('/recover', userPages.getRecover);
+
+  router.post('/recover', userPages.postRecover);
+
+  router.get('/reset/:token', userPages.getReset);
+
+  router.post('/reset/:token', userPages.postReset);
 
   return router;
 };

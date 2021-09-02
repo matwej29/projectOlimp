@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <a href="/admin/{{ path }}/add" class="add__action background-image_when-svg action__icon-add btn btn-primary">
+    Добавить
+  </a>
+  <div class="row">
+    {{#each this.list}}
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h1>
+            {{ this.header }}
+          </h1>
+        </div>
+        <div class="card-body">
+          {{{ this.text }}}
+        </div>
+        {{#if this.date}}
+        <div class="card-footer">
+          {{ this.date }}
+        </div>
+        {{/if}}
+        <div class="card-tools">
+          <a href="/admin/{{ ../path }}/delete?id={{this.id}}"
+            class="list-container__action action__icon-delete background-image_when-svg btn btn-tool">
+            Удалить
+          </a>
+          <a href="/admin/{{ ../path }}/edit?id={{this.id}}"
+            class="list-container__action action__icon-edit background-image_when-svg btn btn-tool">
+            Редактировать
+          </a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

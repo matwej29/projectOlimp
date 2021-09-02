@@ -1,48 +1,53 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const config = require('./dbConfig.json');
+const { format } = require('date-fns');
+const { ru } = require('date-fns/locale');
 
-const sequelize = new Sequelize({
-  dialect: 'postgres',
-  host: config.host,
-  password: config.password,
-  port: config.port,
-  username: config.user,
-  database: config.database,
-  logging: false,
-  query: {
-    raw: true
-  }
-});
-
-class News extends Model {}
-
-News.init(
-  {
-    id: {
-      type: DataTypes.UUIDV4,
-      primaryKey: true,
+/**
+ * @param {import('sequelize/types').Sequelize} sequelize
+ * @param {import('sequelize/types').DataTypes} DataTypes
+ * @param {import('sequelize/types').Model} Model
+ * @returns {import('sequelize/types').ModelDefined}
+ */
+module.exports = (sequelize, DataTypes, Model) => {
+  class News extends Model {}
+  /** @type {import('sequelize/types').ModelDefined} */
+  News.init(
+    {
+      id: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      header: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      text: {
+        type: DataTypes.TEXT,
+      },
+      date: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW(),
+        get() {
+          /**
+           * @type {Date}
+           */
+          const date = this.getDataValue('date');
+          // return `${date.getHours()}:${date.getMinutes()} ${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+          return format(date, 'H:mm d MMMM yyyy', { locale: ru });
+        },
+      },
+      access: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    header: {
-      type: DataTypes.TEXT('tiny'),
-      allowNull: false,
+    {
+      sequelize,
+      modelName: 'News',
+      timestamps: false,
+      tableName: 'news',
     },
-    text: {
-      type: DataTypes.TEXT,
-    },
-    date: {
-      type: DataTypes.DATE,
-    },
-    access: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize,
-    modelName: 'News',
-    timestamps: false,
-    tableName: 'news',
-  },
-);
-
-module.exports = sequelize.models;
+  );
+  return News;
+};

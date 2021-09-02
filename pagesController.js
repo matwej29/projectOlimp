@@ -1,37 +1,34 @@
 const marked = require('marked');
-
-const BDteam = require('./teams.js');
-const dbTeam = new BDteam();
-
-const storage = require('./news.js');
-
-const pages = require('./pageModel.js');
-
-const formatDate = require('./modules/formatDate.js');
+const storage = require('./modelsHandler');
 
 class Controller {
-  async info(req, res) {
-    const info = await pages.Pages.findOne({ where: { title: 'info' } });
-    info.body = marked(info.body)
-    res.render('info', {
-      style_info: 'active-button',
-      page_name: 'Положение',
-      regulation: info.body,
-    });
-  }
-
   async home(req, res) {
-    const templist = await storage.News.findAll({where: {access: 1}});
+    const templist = (await storage.News.findAll({ where: { access: 0 } })) ?? {
+      text: '',
+    };
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
         element.text = marked(element.text);
-        element.date = formatDate(element.date);
       });
     res.render('home', {
       list: templist,
       style_home: 'active-button',
-      page_name: 'Новости',
+      page_name: 'Главная',
+      user: req?.user,
+    });
+  }
+
+  async info(req, res) {
+    const info = (await storage.Pages.findOne({
+      where: { title: 'info' },
+    })) ?? { body: '' };
+    info.body = marked(info?.body ?? '');
+    res.render('info', {
+      style_info: 'active-button',
+      page_name: 'Положение',
+      regulation: info.body,
+      user: req?.user,
     });
   }
 
@@ -43,6 +40,7 @@ class Controller {
     res.render('organizers', {
       style_org: 'active-button',
       page_name: 'Организаторы',
+      user: req?.user,
     });
   }
 
@@ -50,6 +48,7 @@ class Controller {
     res.render('partners', {
       style_part: 'active-button',
       page_name: 'Партнеры',
+      user: req?.user,
     });
   }
 
@@ -57,21 +56,22 @@ class Controller {
     res.render('help', {
       style_help: 'active-button',
       page_name: 'Помощь',
+      user: req?.user,
     });
   }
 
   async teams(req, res) {
-    const templist = await dbTeam.teams();
+    const templist = (await storage.Teams.findAll()) ?? {};
     templist
       .sort((a, b) => a.id - b.id)
       .forEach(async element => {
-        element.description = undefined ? '' : element.description;
-        element.description = marked(element.description);
+        element.description = marked(element.description ?? '');
       });
     res.render('teams', {
       list: templist,
       style_teams: 'active-button',
       page_name: 'Команды',
+      user: req?.user,
     });
   }
 }

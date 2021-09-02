@@ -9,13 +9,13 @@ const auth = basicAuth({
   realm: 'Imb4T3st4pp',
 });
 
-const AdminPages = require('../adminPages.js');
+const AdminPages = require('../adminPages');
 const adminPages = new AdminPages();
 
-const NewsController = require('../newsController.js');
+const NewsController = require('../newsController');
 const newsController = new NewsController();
 
-const TeamsController = require('../teamsController.js');
+const TeamsController = require('../teamsController');
 const teamsController = new TeamsController();
 
 router.get('/admin', auth, adminPages.home);
@@ -51,5 +51,11 @@ router.get('/admin/info', auth, adminPages.info);
 router.get('/admin/info/edit', auth, adminPages.getInfo);
 
 router.post('/admin/info/edit', auth, adminPages.postInfo);
+
+router.get('/admin/requests', auth, adminPages.requests);
+
+router.post('/admin/rejectRequest', auth, adminPages.rejectRequest);
+
+router.post('/admin/acceptRequest', auth, adminPages.acceptRequest);
 
 module.exports = router;
