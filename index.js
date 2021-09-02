@@ -91,7 +91,7 @@ app.use(adminRouter); // долго грузит
 app.use(pageRouter); // pages for unauthorized users
 
 app.get('*', (req, res) => {
-  res.send('page not found');
+  res.render('notfound');
 });
 
 app.listen(PORT);

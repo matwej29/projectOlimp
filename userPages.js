@@ -49,6 +49,8 @@ class Controller {
       user: req.user,
       status: request?.status,
       reason: request?.reason,
+      style_profile: 'active-button',
+      page_name: 'Профиль',
     });
   }
 
