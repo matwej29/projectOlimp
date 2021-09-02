@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes, Model) => {
       },
       status: {
         type: DataTypes.CHAR(20),
-        defaulValue: 'unread',
+        defaulValue: 'на рассмотрении',
       },
       user_id: {
         type: DataTypes.INTEGER,
