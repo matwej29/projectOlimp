@@ -54,7 +54,8 @@ class Controller {
 
   async postRegister(req, res) {
     if (await storage.Users.findOne({ where: { email: req.body.email } })) {
-      res.redirect('/');
+      req.flash('error', 'this email was already used')
+      res.redirect('/login');
     } else {
       await storage.Users.create({
         password: req.body.password,
@@ -128,7 +129,7 @@ class Controller {
         }
       },
     );
-    res.redirect('/');
+    return res.redirect('/');
   }
 
   // /reset/:token
@@ -143,7 +144,7 @@ class Controller {
       req.flash('error', 'Токен сброса пароля неправильный или просроченный');
       return res.redirect('/recover');
     }
-    res.render('reset', {
+    return res.render('reset', {
       email: user.email,
       token: req.params.token,
     });
@@ -181,7 +182,7 @@ class Controller {
         }
       },
     );
-    res.redirect('/login');
+    return res.redirect('/login');
   }
 }
 
