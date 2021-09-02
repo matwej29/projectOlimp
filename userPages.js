@@ -84,7 +84,7 @@ class Controller {
       team_desc: req.body.team_desc,
       school: req.body.school,
       boss: req.body.boss,
-      status: 'unread',
+      status: 'на рассмотрении',
     };
     if (await storage.Requests.findOne({ where: { user_id: req.user.id } })) {
       await storage.Requests.update(request, {
