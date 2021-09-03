@@ -49,12 +49,15 @@ class Controller {
       user: req.user,
       status: request?.status,
       reason: request?.reason,
+      style_profile: 'active-button',
+      page_name: 'Профиль',
     });
   }
 
   async postRegister(req, res) {
     if (await storage.Users.findOne({ where: { email: req.body.email } })) {
-      res.redirect('/');
+      req.flash('error', 'this email was already used')
+      res.redirect('/login');
     } else {
       await storage.Users.create({
         password: req.body.password,
@@ -81,7 +84,7 @@ class Controller {
       team_desc: req.body.team_desc,
       school: req.body.school,
       boss: req.body.boss,
-      status: 'unread',
+      status: 'на рассмотрении',
     };
     if (await storage.Requests.findOne({ where: { user_id: req.user.id } })) {
       await storage.Requests.update(request, {
@@ -128,7 +131,7 @@ class Controller {
         }
       },
     );
-    res.redirect('/');
+    return res.redirect('/');
   }
 
   // /reset/:token
@@ -143,7 +146,7 @@ class Controller {
       req.flash('error', 'Токен сброса пароля неправильный или просроченный');
       return res.redirect('/recover');
     }
-    res.render('reset', {
+    return res.render('reset', {
       email: user.email,
       token: req.params.token,
     });
@@ -181,7 +184,7 @@ class Controller {
         }
       },
     );
-    res.redirect('/login');
+    return res.redirect('/login');
   }
 }
 

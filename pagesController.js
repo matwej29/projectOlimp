@@ -35,6 +35,14 @@ class Controller {
   status404(res) {
     res.status(404).send('Not found');
   }
+  
+  login(req, res) {
+    res.render('login', {
+      style_login: 'active-button',
+      page_name: 'Вход',
+      user: req?.user,
+    });
+  }
 
   organizers(req, res) {
     res.render('organizers', {

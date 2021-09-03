@@ -85,14 +85,14 @@ class Controller {
 
   async rejectRequest(req, res) {
     await storage.Requests.update(
-      { status: 'rejected', reason: req.query?.reason },
+      { status: 'отклонена', reason: req.query?.reason },
       { where: { id: req.query.id } },
     );
   }
 
   async acceptRequest(req, res) {
     await storage.Requests.update(
-      { status: 'accepted' },
+      { status: 'принята' },
       { where: { id: req.query.id } },
     );
   }

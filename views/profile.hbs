@@ -1,20 +1,23 @@
-<p>
-  {{!-- ID:
-  {{user.id}}<br /> --}}
-  {{#if user.email}}
-  Email:
-  {{user.email}}<br />
+<div class="register-container centering">
+  <div class="register-title">
+    {{!-- ID:
+    {{user.id}}<br /> --}}
+    {{#if user.email}}
+    Email:
+    {{user.email}}
+    {{/if}}
+ </div>
+ <div class="register-title">
+    {{#if status}}
+    Статус заявки:
+    {{status}}
+  </div>
+  <a class="button none_decoration" href="/request">Изменить заявку</a>
+  {{else}}
+  <a class="button none_decoration" href="/request">Подать заявку</a>
   {{/if}}
-</p>
-{{#if status}}
-Статус:
-{{status}}</br>
-<a href="/request">Изменить заявку</a>
-{{else}}
-<a href="/request">Подать заявку</a>
-{{/if}}
-{{#if reason}}
-<p>Причина отклонения заявки: {{reason}}</p>
-{{/if}}
-<a href="/recover">Восстановить пароль</a>
-<a href="/logout">Log out</a>
+  {{#if reason}}
+  <b class="register-title">Причина отклонения заявки: <i class="register-title">{{reason}}</i></b>
+  {{/if}}
+  <a class="hyperlink register-title" href="/logout">Выйти из учетной записи</a>
+</div>

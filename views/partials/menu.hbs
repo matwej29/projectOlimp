@@ -9,4 +9,13 @@
     <a href="organizers" class="menu__action none_decoration {{style_org}} color_honey">Организаторы</a>
     <a href="partners" class="menu__action none_decoration {{style_part}} color_honey">Партнеры</a>
     <a href="help" class="menu__action none_decoration {{style_help}} color_honey">Помощь</a>
+    {{#if user}}
+    <div style="display:flex; margin-left:auto!important; margin-right:5vw">
+        <a href="profile" class="menu__action none_decoration {{style_profile}} color_honey">Профиль</a>
+    </div>
+    {{else}}
+    <div style="display:flex; margin-left:auto!important; margin-right:5vw">
+        <a href="login" class="menu__action none_decoration {{style_login}} color_honey">Вход</a>
+    </div>
+    {{/if}}
 </div>
