@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 16
+install:
+  - npm i --prod
+  - npm run build-frontend
+env:
+  - NODE_ENV="production"
+  - PORT=3000
