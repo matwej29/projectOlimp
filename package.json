@@ -43,8 +43,8 @@
     "start-backend": "nodemon -e js,json,hbs index.js",
     "start-frontend": "parcel watch --public-url /static/bundle",
     "build-frontend": "parcel build --public-url /static/bundle",
-    "eslint": "eslint \"**/*.{js,ts}\"",
-    "test": "mocha"
+    "test": "eslint \"**/*.{js,ts}\"",
+    "test-not-implemented": "mocha"
   },
   "targets": {
     "frontend": {
