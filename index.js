@@ -3,7 +3,7 @@ const express = require('express');
 
 const app = express();
 const hbs = require('hbs');
-const helmet = require('helmet'); // protection
+// const helmet = require('helmet'); // protection
 const session = require('express-session');
 const mailer = require('express-mailer');
 const mailCfg = require('./mailConfig.json');
@@ -17,26 +17,26 @@ mailer.extend(app, {
   auth: { user: mailCfg.user, pass: mailCfg.password },
 });
 
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      useDefaults: true,
-      directives: {
-        'script-src': [
-          "'self' 'unsafe-inline'",
-          'https://cdn.jsdelivr.net',
-          'https://cdnjs.cloudflare.com',
-        ],
-        'connect-src': [
-          "'self'",
-          'ws://localhost:1234',
-          'https://cdn.jsdelivr.net',
-        ],
-        'script-src-attr': ["'self' 'unsafe-inline'"],
-      },
-    },
-  }),
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       useDefaults: true,
+//       directives: {
+//         'script-src': [
+//           "'self' 'unsafe-inline'",
+//           'https://cdn.jsdelivr.net',
+//           'https://cdnjs.cloudflare.com',
+//         ],
+//         'connect-src': [
+//           "'self'",
+//           'ws://localhost:1234',
+//           'https://cdn.jsdelivr.net',
+//         ],
+//         'script-src-attr': ["'self' 'unsafe-inline'"],
+//       },
+//     },
+//   }),
+// );
 
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.set('view engine', 'hbs');
