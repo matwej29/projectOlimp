@@ -56,7 +56,7 @@ class Controller {
 
   async postRegister(req, res) {
     if (await storage.Users.findOne({ where: { email: req.body.email } })) {
-      req.flash('error', 'this email was already used')
+      req.flash('error', 'this email was already used');
       res.redirect('/login');
     } else {
       await storage.Users.create({
@@ -116,14 +116,12 @@ class Controller {
       resetPasswordExpires: datefns.add(Date.now(), { days: 1 }),
     });
     res.mailer.send(
-      'email',
+      'email-href',
       {
         to: req.body.email,
         subject: 'Восстановление пароля',
         layout: 'layoutE',
-        value: `Вы получили это письмо, потому что вы (или кто-то еще) запросил сброс пароля от вашего аккаунта \n\n
-        Для того, чтобы сбросить пароль, проследуйте по ссылке - http://${req.headers.host}/reset/${token} \n\n
-        Ссылка истекает через 24 часа`,
+        value: `http://${req.headers.host}/reset/${token}`,
       },
       err => {
         if (err != null) {
@@ -170,13 +168,11 @@ class Controller {
       resetPasswordExpires: undefined,
     });
     res.mailer.send(
-      'email',
+      'email-post',
       {
         to: user.email,
         subject: 'Ваш пароль был обновлен',
         layout: 'layoutE',
-        value: `Здравствуйте, \n\n
-        Ваш пароль был обновлен`,
       },
       err => {
         if (err != null) {
