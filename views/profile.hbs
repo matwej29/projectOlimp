@@ -7,11 +7,9 @@
     {{user.email}}
     {{/if}}
  </div>
- <div class="register-title">
-    {{#if status}}
-    Статус заявки:
-    {{status}}
-  </div>
+  {{#if status}}
+  Статус заявки:
+  {{status}}
   <a class="button none_decoration" href="/request">Изменить заявку</a>
   {{else}}
   <a class="button none_decoration" href="/request">Подать заявку</a>
