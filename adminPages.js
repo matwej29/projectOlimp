@@ -65,8 +65,8 @@ class Controller {
   }
 
   async postInfo(req, res) {
-    await storage.Pages.upsert(
-      { title: 'info', body: req.body.text },
+    await storage.Pages.update(
+      { body: req.body.text },
       { where: { title: 'info' } },
     );
     res.redirect('/admin/info');
