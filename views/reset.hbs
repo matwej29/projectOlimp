@@ -1,4 +1,16 @@
-<form action='/reset/{{token}}' method="post">
-    <input type="password" name="password" placeholder="password">
-    <button type="submit" style="width: 5vh; height:4vh;">Подтвердить</button>
-</form>
+<div class="register-container centering">
+  <div style="margin-top: -1vh;">
+    <h1>Восстановление</h1>
+  </div>
+  <div class="info-block__text">
+    <form action="/reset/{{token}}" method="post">
+      <div class="register-line">
+        <b class="register-title">Новый пароль</b>
+        <input class="input" type="password" name="password" />
+      </div>
+      <div class="register-line centering">
+        <input type="submit" class="button" value="Изменить" />
+      </div>
+    </form>
+  </div>
+</div>
