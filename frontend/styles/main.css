@@ -72,6 +72,7 @@ body {
   margin-left: 10px;
   margin-bottom: 1vh;
   font-size: 2vh;
+  word-break: break-word;
 }
 
 .menu-above {
